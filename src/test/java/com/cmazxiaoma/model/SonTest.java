@@ -1,8 +1,6 @@
-package cmazxiaoma.model;
+package com.cmazxiaoma.model;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @author cmazxiaoma

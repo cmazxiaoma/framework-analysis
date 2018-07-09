@@ -1,4 +1,4 @@
-package cmazxiaoma.model;
+package com.cmazxiaoma.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,8 +13,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Father {
+public class Son extends Father {
 
-    protected String fatherName;
+    private String sonName;
 
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmazxiaoma.mybatis.ISchoolMapper">
+
+    <resultMap id="baseResultMap"
+               type="com.cmazxiaoma.model.School" autoMapping="true">
+        <id column="id" property="id" />
+        <collection property="studentList" ofType="com.cmazxiaoma.model.Student">
+            <id column="studentId" property="id"/>
+            <result column="studentName" property="studentName"/>
+            <result column="studentSchoolId" property="schoolId"/>
+            <result column="studentCreatedDt" property="createdDt"/>
+            <result column="studentUpdatedDt" property="updatedDt"/>
+            <result column="studentIsDel" property="isDel"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="baseResultMap1"
+               type="com.cmazxiaoma.model.School" autoMapping="true">
+        <id column="id" property="id" />
+        <collection property="studentList" ofType="com.cmazxiaoma.model.Student"
+            column="id" select="findStudentBySchoolId">
+        </collection>
+    </resultMap>
+
+    <select id="findOneByV1" parameterType="java.lang.String"
+            resultMap="baseResultMap">
+        select school.*,
+        student.id as studentId,
+        student.student_name as studentName,
+        student.school_id as studentSchoolId,
+        student.created_dt as studentCreatedDt,
+        student.updated_dt as studentUpdatedDt,
+        student.is_del as studentIsDel
+        from tbl_school as school
+        join tbl_student as student on (school.id = student.school_id and student.is_del = '0')
+        where 1 = 1
+        and school.is_del = '0'
+        and school.id = #{schoolId}
+    </select>
+
+    <select id="findOneByV2" parameterType="java.lang.String"
+            resultMap="baseResultMap1">
+        select school.*
+        from tbl_school as school
+        where 1 = 1
+        and school.is_del = '0'
+        and school.id = #{schoolId}
+    </select>
+
+    <select id="findStudentBySchoolId" parameterType="java.lang.String"
+            resultType="com.cmazxiaoma.model.Student">
+        select student.*
+        from tbl_student as student
+        where 1 = 1
+        and student.is_del = '0'
+        and student.school_id = #{schoolId}
+    </select>
+
+</mapper>

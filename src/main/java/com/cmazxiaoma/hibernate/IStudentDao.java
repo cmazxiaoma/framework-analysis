@@ -1,6 +1,6 @@
-package cmazxiaoma.dao;
+package com.cmazxiaoma.hibernate;
 
-import cmazxiaoma.model.Student;
+import com.cmazxiaoma.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

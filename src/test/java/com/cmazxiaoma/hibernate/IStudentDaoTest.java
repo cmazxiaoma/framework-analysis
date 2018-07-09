@@ -1,17 +1,13 @@
-package cmazxiaoma.dao;
+package com.cmazxiaoma.hibernate;
 
-import cmazxiaoma.BaseTest;
-import cmazxiaoma.model.School;
-import cmazxiaoma.model.Student;
-import org.hibernate.SessionFactory;
+import com.cmazxiaoma.BaseTest;
+import com.cmazxiaoma.model.School;
+import com.cmazxiaoma.model.Student;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
-
-import static org.junit.Assert.*;
 
 /**
  * @author cmazxiaoma
@@ -35,5 +31,12 @@ public class IStudentDaoTest extends BaseTest {
 
         School school = student.getSchool();
         System.out.println("school=" + school);
+
+        System.out.println("=======================");
+        Student student1 = studentDao.findOne("1");
+        System.out.println("student=" + student1);
+        System.out.println("student.id=" + student1);
+        School school1 = student1.getSchool();
+        System.out.println("school1=" + school1);
     }
 }

@@ -1,4 +1,4 @@
-package cmazxiaoma;
+package com.cmazxiaoma;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmazxiaoma.mybatis.IStudentMapper">
+
+    <cache eviction="FIFO" flushInterval="60000"
+           readOnly="true" size="1024" blocking="false"/>
+
+    <resultMap id="baseResultMap"
+               type="com.cmazxiaoma.model.Student" autoMapping="true">
+    </resultMap>
+
+    <resultMap id="baseResultMap1" type="com.cmazxiaoma.model.Student" autoMapping="true">
+        <!--这里的column对应着student的外键，也就是school_id-->
+        <association property="school" javaType="com.cmazxiaoma.model.School"
+            select="findSchoolById" column="school_id">
+        </association>
+    </resultMap>
+
+    <resultMap id="baseResultMap2" type="com.cmazxiaoma.model.Student" autoMapping="true">
+        <association property="school" javaType="com.cmazxiaoma.model.School">
+            <id column="schoolId" property="id"/>
+            <result column="schoolName" property="schoolName"/>
+            <result column="schoolIsDel" property="isDel"/>
+            <result column="schoolCreatedDt" property="createdDt"/>
+            <result column="schoolUpdatedDt" property="updatedDt"/>
+        </association>
+    </resultMap>
+
+
+    <!--查询学生的第一种方法-->
+    <select id="findOneByV1" parameterType="java.lang.String"
+            resultType="com.cmazxiaoma.model.Student">
+        select student.*,
+        school.id "school.id",
+        school.school_name "school.schoolName",
+        school.created_dt "school.createdDt",
+        school.updated_dt "school.updatedDt",
+        school.is_del "school.isDel"
+        from tbl_student as student
+        join tbl_school as school on (student.school_id = school.id and school.is_del = '0')
+        where 1 = 1
+        and student.is_del = '0'
+        and student.id = #{studentId}
+    </select>
+
+    <!--查询学生的第二种方法-->
+    <select id="findOneByV2" parameterType="java.lang.String"
+            resultMap="baseResultMap1">
+        select student.*
+        from tbl_student as student
+        where 1 = 1
+        and student.is_del = '0'
+        and student.id = #{studentId}
+    </select>
+
+    <select id="findSchoolById" parameterType="java.lang.String"
+            resultType="com.cmazxiaoma.model.School">
+        select school.*
+        from tbl_school as school
+        where 1 = 1
+        and school.is_del = '0'
+        and school.id = #{schoolId}
+    </select>
+
+    <!--查询学生的第三种方法-->
+    <select id="findOneByV3" parameterType="java.lang.String"
+            resultMap="baseResultMap2">
+        select student.*,
+        school.id as schoolId,
+        school.school_name as schoolName,
+        school.created_dt as schoolCreatedDt,
+        school.updated_dt as schoolUpdatedDt,
+        school.is_del as schoolIsDel
+        from tbl_student as student
+        join tbl_school as school on (student.school_id = school.id and school.is_del = '0')
+        where 1 = 1
+        and student.is_del = '0'
+        and student.id = #{studentId}
+    </select>
+
+    <update id="updateIsDel" parameterType="java.lang.String">
+        update tbl_student as student
+        set student.is_del = '0'
+        where 1 = 1
+        and student.id = #{studentId}
+    </update>
+
+</mapper>

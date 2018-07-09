@@ -1,8 +1,7 @@
-package cmazxiaoma.dao;
+package com.cmazxiaoma.hibernate;
 
-import cmazxiaoma.model.School;
+import com.cmazxiaoma.model.School;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author cmazxiaoma

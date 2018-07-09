@@ -1,10 +1,12 @@
-package cmazxiaoma.model;
+package com.cmazxiaoma.model;
 
-import com.sun.javafx.beans.IDProperty;
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,8 +21,9 @@ import java.util.Set;
 @Table(name = "tbl_school")
 @Setter
 @Getter
-@EqualsAndHashCode
-public class School {
+@DynamicUpdate
+@DynamicInsert
+public class School implements Serializable {
 
     @Id
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
@@ -31,7 +34,9 @@ public class School {
     @Column(name = "school_name")
     private String schoolName;
 
-    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH,
+                    CascadeType.REMOVE})
     private Set<Student> studentList = new HashSet<>();
 
     @Column(name = "created_dt")

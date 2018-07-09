@@ -1,10 +1,12 @@
-package cmazxiaoma.model;
+package com.cmazxiaoma.model;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.beans.factory.InitializingBean;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -17,7 +19,9 @@ import java.util.Date;
 @Table(name = "tbl_student")
 @Setter
 @Getter
-public class Student {
+@DynamicUpdate
+@DynamicInsert
+public class Student implements Serializable {
 
     @Id
     @GenericGenerator(name = "idGenerator", strategy = "uuid")

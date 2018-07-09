@@ -21,6 +21,25 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<commons-lang3.version>3.6</commons-lang3.version>
+		<com.google.guava.version>23.0</com.google.guava.version>
+		<mybatis-spring.version>1.3.1</mybatis-spring.version>
+		<mybatis.version>3.4.5</mybatis.version>
+		<mapper.version>3.5.0</mapper.version>
+		<pagehelper.version>5.1.2</pagehelper.version>
+		<fastjson.version>1.2.44</fastjson.version>
+		<druid-spring-boot-starter.version>1.1.6</druid-spring-boot-starter.version>
+		<freemarker.version>2.3.23</freemarker.version>
+		<org.mybatis.generator.version>1.3.5</org.mybatis.generator.version>
+		<lombok.version>1.16.8</lombok.version>
+		<dom4j.version>1.6.1</dom4j.version>
+		<xstream.version>1.4.10</xstream.version>
+		<httpclient.version>4.5.4</httpclient.version>
+		<apache.commons.io.version>2.5</apache.commons.io.version>
+		<jedis.version>2.9.0</jedis.version>
+		<protostuff.version>1.1.2</protostuff.version>
+		<commons.version>3.2.1</commons.version>
+		<mybatis-spring-boot.version>1.3.1</mybatis-spring-boot.version>
 	</properties>
 
 	<dependencies>
@@ -68,6 +87,24 @@
 			<version>2.2.4</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatis-spring-boot.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis-spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+
 		<!--&lt;!&ndash;spring boot tomcat-->
 <!--默认可以不用配置，但当需要把当前web应用布置到外部servlet容器时就需要配置，并将scope配置为provided&ndash;&gt;-->
 		<!--<dependency>-->
@@ -79,13 +116,100 @@
 	</dependencies>
 
 	<build>
+		<finalName>hibernateDemo</finalName>
+
 		<plugins>
+			<!--Spring Boot热部署-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>woff</nonFilteredFileExtension>
+						<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+						<nonFilteredFileExtension>eot</nonFilteredFileExtension>
+						<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+						<nonFilteredFileExtension>svg</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
 			</plugin>
 		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>*</include>
+					<include>*/*</include>
+					<!--copy static文件夹下面所有-->
+					<include>*/**</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+
+			<resource>
+				<directory>>${project.basedir}/src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>>fonts/**</exclude>
+				</excludes>
+			</resource>
+
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>fonts/**</include>
+				</includes>
+			</resource>
+
+		</resources>
+
 	</build>
 
+	<repositories>
+		<repository>
+			<id>aliyun-repos</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>aliyun-plugin</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 </project>
