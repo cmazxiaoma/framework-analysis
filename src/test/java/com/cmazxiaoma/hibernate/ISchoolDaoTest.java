@@ -3,8 +3,11 @@ package com.cmazxiaoma.hibernate;
 import com.cmazxiaoma.BaseTest;
 import com.cmazxiaoma.model.School;
 import com.cmazxiaoma.model.Student;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 import java.util.Set;
 
@@ -67,6 +70,7 @@ public class ISchoolDaoTest extends BaseTest {
         schoolDao.delete(school);
 
         System.out.println("==================");
+
         School school1 = schoolDao.findOne("1");
         System.out.println("school1=" + school1);
         Set<Student> studentSet1 = school1.getStudentList();
@@ -74,13 +78,17 @@ public class ISchoolDaoTest extends BaseTest {
     }
 
     /**
-     *
+     * 级联刷新操作
      */
     @Test
     public void refresh() {
 
     }
 
+    /**
+     * 级联游离操作,如果你要删除一个实体，但是它有外键无法删除，
+     * 这时候你就需要这个级联权限了。它会撤销所有相关的外键关联。
+     */
     @Test
     public void detach() {
         Student student = studentDao.findOne("1");
@@ -94,6 +102,6 @@ public class ISchoolDaoTest extends BaseTest {
 
         Student student1 = studentDao.findOne("1");
         System.out.println("student1=" + student1);
-
     }
+
 }

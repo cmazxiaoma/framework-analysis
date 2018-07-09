@@ -1,11 +1,11 @@
 package com.cmazxiaoma.model;
 
 import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -37,6 +37,7 @@ public class Student implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id")
+    @NotFound(action = NotFoundAction.IGNORE)
     private School school;
 
     @Column(name = "created_dt")

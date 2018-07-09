@@ -34,9 +34,7 @@ public class School implements Serializable {
     @Column(name = "school_name")
     private String schoolName;
 
-    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH,
-                    CascadeType.REMOVE})
+    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Student> studentList = new HashSet<>();
 
     @Column(name = "created_dt")
