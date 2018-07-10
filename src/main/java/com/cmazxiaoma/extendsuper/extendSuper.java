@@ -20,10 +20,10 @@ public class extendSuper {
         fruitList.contains(new Apple());
         fruitList.indexOf(new Apple());
 
-        Apple apple = (Apple) fruitList.get(0);
+        Fruit fruit = fruitList.get(0);
         Orange orange = (Orange) fruitList.get(0);
 
-        System.out.println("apple=" + apple);
+        System.out.println("fruit=" + fruit);
         System.out.println("orange=" + orange);
 
         List<? super Apple> fruitList1 = new ArrayList<>();
@@ -42,3 +42,15 @@ class Fruit {}
 class Apple extends Fruit {}
 class Orange extends Fruit {}
 class Apple1 extends Apple {}
+
+
+/**
+ *  <? extends E>
+ *      add:不允许添加任何元素
+ *      get:可以获取元素，但是必须使用E来接收元素
+ *
+ *  <? super E>
+ *      add:可以添加E和E的子类元素
+ *      get:可以获取元素，但是类的信息丢失了，所以返回只能使用Object引用来接收。
+ *      如果需要自己类型需要强制转换。
+ */
