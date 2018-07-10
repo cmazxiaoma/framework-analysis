@@ -37,6 +37,7 @@ public class Student implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id")
+    // 会使懒加载失效
     @NotFound(action = NotFoundAction.IGNORE)
     private School school;
 

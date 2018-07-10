@@ -26,6 +26,10 @@ public class ISchoolDaoTest extends BaseTest {
     @Autowired
     private IStudentDao studentDao;
 
+    /**
+     * 查询school操作是否启动了懒加载策略
+     * @throws Exception
+     */
     @Test
     public void query() throws Exception {
         School school = schoolDao.findOne("1");
@@ -35,6 +39,9 @@ public class ISchoolDaoTest extends BaseTest {
         System.out.println("studentList=" + studentList);
     }
 
+    /**
+     * 级联保存操作
+     */
     @Test
     public void persist() {
         School school = schoolDao.findOne("1");
@@ -49,6 +56,9 @@ public class ISchoolDaoTest extends BaseTest {
         schoolDao.save(school);
     }
 
+    /**
+     * 级联合并操作
+     */
     @Test
     public void merge() {
         Student student =  studentDao.findOne("1");
@@ -61,6 +71,9 @@ public class ISchoolDaoTest extends BaseTest {
         System.out.println("studentSet=" + studentSet);
     }
 
+    /**
+     * 级联删除操作
+     */
     @Test
     public void remove() {
         School school = schoolDao.findOne("1");

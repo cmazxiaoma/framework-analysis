@@ -37,9 +37,12 @@ public class IStudentDaoTest extends BaseTest {
         System.out.println("school=" + school);
 
         System.out.println("=======================");
+
         Student student1 = studentDao.findOne("1");
+
         System.out.println("student=" + student1);
         System.out.println("student.id=" + student1);
+
         School school1 = student1.getSchool();
         System.out.println("school1=" + school1);
     }
@@ -53,6 +56,7 @@ public class IStudentDaoTest extends BaseTest {
      */
     @Test
     public void throwException() {
+        // 如果用@NotFound注解，会让懒加载机制失效
         Student student = studentDao.findOne("1");
         System.out.println("student=" + student);
         System.out.println("school=" + student.getSchool());
