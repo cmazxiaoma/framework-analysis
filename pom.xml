@@ -176,7 +176,7 @@
 				<directory>>${project.basedir}/src/main/resources</directory>
 				<filtering>true</filtering>
 				<excludes>
-					<exclude>>fonts/**</exclude>
+					<exclude>fonts/**</exclude>
 				</excludes>
 			</resource>
 

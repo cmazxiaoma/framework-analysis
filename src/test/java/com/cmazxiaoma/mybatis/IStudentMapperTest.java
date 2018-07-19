@@ -3,14 +3,16 @@ package com.cmazxiaoma.mybatis;
 import com.cmazxiaoma.BaseTest;
 import com.cmazxiaoma.model.School;
 import com.cmazxiaoma.model.Student;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.*;
 import org.apache.ibatis.session.defaults.DefaultSqlSession;
 import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.jdbc.Sql;
 
 import javax.annotation.Resource;
+import javax.xml.transform.Result;
 
 import static org.junit.Assert.*;
 
@@ -102,12 +104,16 @@ public class IStudentMapperTest extends BaseTest {
         SqlSession studentSqlSession = sqlSessionFactory.openSession();
 
         try {
-            Student student1 = studentSqlSession.selectOne(STUDENTMAPPER + "findOneByV2", "1");
+            Student student1 = studentSqlSession.selectOne(
+                    STUDENTMAPPER + "findOneByV2", "1"
+            );
             System.out.println("student1=" + student1);
 
 //            studentSqlSession.update(STUDENTMAPPER + "updateIsDel", "1");
 
-            Student student2 = studentSqlSession.selectOne(STUDENTMAPPER + "findOneByV2", "1");
+            Student student2 = studentSqlSession.selectOne(
+                    STUDENTMAPPER + "findOneByV2", "1"
+            );
             System.out.println("student2=" + student2);
         } finally {
             if (studentSqlSession != null) {
@@ -116,15 +122,18 @@ public class IStudentMapperTest extends BaseTest {
         }
     }
 
+
     /**
      * 二级缓存，手动开启
      */
     @Test
     public void twoLevelCache() {
+
         SqlSession studentSqlSession1 = sqlSessionFactory.openSession();
 
         try {
-            Student student1 = studentSqlSession1.selectOne(STUDENTMAPPER + "findOneByV2", "1");
+            Student student1 = studentSqlSession1.selectOne(
+                    STUDENTMAPPER + "findOneByV2", "1");
             System.out.println("student1=" + student1);
         } finally {
             if (studentSqlSession1 != null) {
@@ -156,4 +165,42 @@ public class IStudentMapperTest extends BaseTest {
         System.out.println("student3=" + student3);
     }
 
+    /**
+     * Executor.query()有参数ResultHandler作为回调，可以对ResultContext做处理
+     */
+    @Test
+    public void testResultHandler() {
+        SqlSession studentSqlSession = sqlSessionFactory.openSession();
+
+        try {
+            studentSqlSession.select(
+                    STUDENTMAPPER + "findOneByV2",
+                    "1",
+                    new ResultHandler() {
+                        @Override
+                        public void handleResult(ResultContext resultContext) {
+                            System.out.println("=======>resultContext=" + resultContext);
+                            System.out.println("========>stopped=" + resultContext.isStopped());
+                            System.out.println("========>resultObject=" + resultContext.getResultObject());
+                            System.out.println("========>resultCount=" + resultContext.getResultCount());
+                        }
+                    }
+            );
+        } finally {
+            if (studentSqlSession != null) {
+                studentSqlSession.close();
+            }
+        }
+    }
+
+    /**
+     * 通过SqlSession获取Mapper
+     */
+    @Test
+    public void testDynamicMapper() {
+        SqlSession defaultSqlSession = sqlSessionFactory.openSession();
+        IStudentMapper mapper = defaultSqlSession.getMapper(IStudentMapper.class);
+        Student student = mapper.findOneByV1("1");
+        System.out.println("student=" + student);
+    }
 }
