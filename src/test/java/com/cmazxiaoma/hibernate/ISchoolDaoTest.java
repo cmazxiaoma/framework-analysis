@@ -72,7 +72,7 @@ public class ISchoolDaoTest extends BaseTest {
     }
 
     /**
-     * 级联删除操作
+     * 级联删除操作，全部删除
      */
     @Test
     public void remove() {
@@ -89,6 +89,33 @@ public class ISchoolDaoTest extends BaseTest {
         Set<Student> studentSet1 = school1.getStudentList();
         System.out.println("studentSet1=" + studentSet1);
     }
+
+    /**
+     * 级联删除操作，部分删除
+     */
+    @Test
+    public void remove1() {
+        School school = schoolDao.findOne("1");
+
+        Set<Student> studentSet = school.getStudentList();
+        System.out.println("studentSet=" + studentSet);
+
+        school.setStudentList(null);
+
+        Set<Student> studentSet1 = school.getStudentList();
+        System.out.println("studentSet1=" + studentSet1);
+
+        schoolDao.delete(school);
+
+        System.out.println("==================");
+
+        School school1 = schoolDao.findOne("1");
+        System.out.println("school1=" + school1);
+
+        Set<Student> studentSet2 = school1.getStudentList();
+        System.out.println("studentSet2=" + studentSet1);
+    }
+
 
     /**
      * 级联刷新操作

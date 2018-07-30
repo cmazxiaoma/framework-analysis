@@ -3,11 +3,15 @@ package com.cmazxiaoma.mybatis;
 import com.cmazxiaoma.BaseTest;
 import com.cmazxiaoma.model.School;
 import com.cmazxiaoma.model.Student;
+import org.apache.ibatis.mapping.ResultMap;
+import org.apache.ibatis.session.Configuration;
 import org.junit.Test;
 
 import javax.annotation.Resource;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.*;
