@@ -105,6 +105,12 @@
 			<version>${mybatis.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.6</version>
+		</dependency>
+
 		<!--&lt;!&ndash;spring boot tomcat-->
 <!--默认可以不用配置，但当需要把当前web应用布置到外部servlet容器时就需要配置，并将scope配置为provided&ndash;&gt;-->
 		<!--<dependency>-->
