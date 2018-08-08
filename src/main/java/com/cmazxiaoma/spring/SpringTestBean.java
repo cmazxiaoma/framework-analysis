@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @Description: TODO
  * @date 2018/8/7 20:01
  */
-@Component
 public class SpringTestBean implements BeanNameAware, BeanFactoryAware {
 
     private BeanFactory beanFactory;

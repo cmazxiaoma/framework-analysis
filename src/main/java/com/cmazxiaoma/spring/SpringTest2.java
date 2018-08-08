@@ -1,0 +1,25 @@
+package com.cmazxiaoma.spring;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+/**
+ * @author cmazxiaoma
+ * @version V1.0
+ * @Description: TODO
+ * @date 2018/8/8 16:14
+ */
+@Component
+public class SpringTest2 {
+
+    private String name = "springTest2";
+
+    @Override
+    public String toString() {
+        return "SpringTest2{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
+}
