@@ -1,10 +1,10 @@
 package com.cmazxiaoma.spring;
 
 import com.cmazxiaoma.BaseTest;
+import com.cmazxiaoma.spring.bean.SpringTest3;
+import com.cmazxiaoma.spring.bean.SpringTestBean;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.Resource;
 
 /**
  * @author cmazxiaoma
@@ -14,9 +14,20 @@ import javax.annotation.Resource;
  */
 public class SpringTest extends BaseTest {
 
+    @Autowired
+    private SpringTest3 springTest3;
+
+    @Autowired
+    private SpringTestBean springTestBean;
+
     @Test
     public void test() {
-        SpringTest3 springTest3 = new SpringTest3();
         System.out.println("springTest3=" + springTest3);
     }
+
+    @Test
+    public void test1() {
+        System.out.println("springTestBean=" + springTestBean);
+    }
+
 }

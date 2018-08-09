@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-// 启动注解事务管理
+// 启动注解事务管理，等同于xml配置方式的<tx:annotation-driven />
 @EnableTransactionManagement
 public class DemoApplication {
 

@@ -1,4 +1,4 @@
-package com.cmazxiaoma.spring;
+package com.cmazxiaoma.spring.bean;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -21,13 +21,16 @@ public class SpringTestBean implements BeanNameAware, BeanFactoryAware {
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = beanFactory;
-        System.out.println(beanFactory);
+//        System.out.println("beanFactory=" + this.beanFactory);
+//
+//        Object object = beanFactory.getBean("springTestBean");
+//        System.out.println("springTestBean=" + object);
     }
 
     @Override
     public void setBeanName(String name) {
-        this.beanName = beanName;
-        System.out.println(beanName);
+        this.beanName = name;
+//        System.out.println("beanName=" + this.beanName);
     }
 
 }

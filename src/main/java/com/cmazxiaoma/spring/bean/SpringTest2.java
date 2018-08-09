@@ -1,4 +1,4 @@
-package com.cmazxiaoma.spring;
+package com.cmazxiaoma.spring.bean;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
