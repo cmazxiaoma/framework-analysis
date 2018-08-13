@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * @Description: TODO
  * @date 2018/8/8 16:16
  */
-@Component
 public class SpringTest3 extends CommonSpringTest {
 
 }

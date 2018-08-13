@@ -1,10 +1,15 @@
 package com.cmazxiaoma.controller.v1;
 
 import com.cmazxiaoma.controller.v1.BaseController;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -45,5 +50,11 @@ public class TestController extends BaseController {
 //        System.out.println("base.request=" + request);
         System.out.println("base.request.name=" + request.getParameter("name"));
 
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
 }

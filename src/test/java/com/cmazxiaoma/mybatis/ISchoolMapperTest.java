@@ -1,20 +1,14 @@
 package com.cmazxiaoma.mybatis;
 
-import com.cmazxiaoma.BaseTest;
+import com.cmazxiaoma.InitSpringTest;
 import com.cmazxiaoma.model.School;
 import com.cmazxiaoma.model.Student;
-import org.apache.ibatis.mapping.ResultMap;
-import org.apache.ibatis.session.Configuration;
 import org.junit.Test;
 
 import javax.annotation.Resource;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 /**
  * @author cmazxiaoma
@@ -22,7 +16,7 @@ import static org.junit.Assert.*;
  * @Description: TODO
  * @date 2018/7/5 17:14
  */
-public class ISchoolMapperTest extends BaseTest {
+public class ISchoolMapperTest extends InitSpringTest {
 
     @Resource
     private ISchoolMapper schoolMapper;

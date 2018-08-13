@@ -1,13 +1,11 @@
 package com.cmazxiaoma.service.impl;
 
-import com.cmazxiaoma.BaseTest;
+import com.cmazxiaoma.InitSpringTest;
 import com.cmazxiaoma.model.Student;
 import com.cmazxiaoma.service.IStudentService;
 import org.junit.Test;
 
 import javax.annotation.Resource;
-
-import static org.junit.Assert.*;
 
 /**
  * @author cmazxiaoma
@@ -15,7 +13,7 @@ import static org.junit.Assert.*;
  * @Description: TODO
  * @date 2018/7/6 15:49
  */
-public class StudentServiceImplTest extends BaseTest {
+public class StudentServiceImplTest extends InitSpringTest {
 
     @Resource
     private IStudentService studentService;

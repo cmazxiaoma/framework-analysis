@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * @Description: TODO
  * @date 2018/8/8 16:13
  */
-@Component
+
 public class SpringTest1 {
 
     private String name = "springTest1";

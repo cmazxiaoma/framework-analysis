@@ -1,15 +1,12 @@
 package com.cmazxiaoma.hibernate;
 
-import com.cmazxiaoma.BaseTest;
+import com.cmazxiaoma.InitSpringTest;
 import com.cmazxiaoma.model.School;
 import com.cmazxiaoma.model.Student;
-import org.hibernate.jpa.internal.EntityManagerFactoryImpl;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
 
 import javax.annotation.Resource;
-import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -19,7 +16,7 @@ import javax.persistence.EntityManagerFactory;
  * @Description: TODO
  * @date 2018/7/3 18:00
  */
-public class IStudentDaoTest extends BaseTest {
+public class IStudentDaoTest extends InitSpringTest {
 
     @Resource
     private IStudentDao studentDao;

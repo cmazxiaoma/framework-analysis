@@ -1,13 +1,10 @@
 package com.cmazxiaoma.hibernate;
 
-import com.cmazxiaoma.BaseTest;
+import com.cmazxiaoma.InitSpringTest;
 import com.cmazxiaoma.model.School;
 import com.cmazxiaoma.model.Student;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 import java.util.Set;
 
@@ -18,7 +15,7 @@ import java.util.Set;
  * @date 2018/7/3 17:59
  */
 
-public class ISchoolDaoTest extends BaseTest {
+public class ISchoolDaoTest extends InitSpringTest {
 
     @Autowired
     private ISchoolDao schoolDao;

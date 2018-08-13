@@ -1,20 +1,12 @@
 package com.cmazxiaoma.mybatis;
 
-import com.cmazxiaoma.BaseTest;
+import com.cmazxiaoma.InitSpringTest;
 import com.cmazxiaoma.model.School;
 import com.cmazxiaoma.model.Student;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.*;
-import org.apache.ibatis.session.defaults.DefaultSqlSession;
-import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.jdbc.Sql;
 
 import javax.annotation.Resource;
-import javax.xml.transform.Result;
-
-import static org.junit.Assert.*;
 
 /**
  * @author cmazxiaoma
@@ -22,7 +14,7 @@ import static org.junit.Assert.*;
  * @Description: TODO
  * @date 2018/7/5 14:22
  */
-public class IStudentMapperTest extends BaseTest {
+public class IStudentMapperTest extends InitSpringTest {
 
     @Resource
     private IStudentMapper studentMapper;

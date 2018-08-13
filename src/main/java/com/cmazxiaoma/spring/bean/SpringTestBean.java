@@ -1,10 +1,14 @@
 package com.cmazxiaoma.spring.bean;
 
+import com.cmazxiaoma.spring.lazy.Hero;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * @author cmazxiaoma
@@ -22,9 +26,12 @@ public class SpringTestBean implements BeanNameAware, BeanFactoryAware {
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = beanFactory;
 //        System.out.println("beanFactory=" + this.beanFactory);
-//
-//        Object object = beanFactory.getBean("springTestBean");
-//        System.out.println("springTestBean=" + object);
+
+//        Object object = beanFactory.getBean(SpringTest3.class);
+//        System.out.println("SpringTest3=" + object);
+
+//        Object hero = beanFactory.getBean(Hero.class);
+//        System.out.println("hero=" + hero);
     }
 
     @Override
@@ -33,4 +40,10 @@ public class SpringTestBean implements BeanNameAware, BeanFactoryAware {
 //        System.out.println("beanName=" + this.beanName);
     }
 
+    @Override
+    public String toString() {
+        return "SpringTestBean{" +
+                "beanName='" + beanName + '\'' +
+                '}';
+    }
 }
