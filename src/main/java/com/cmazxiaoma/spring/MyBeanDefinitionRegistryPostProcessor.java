@@ -74,7 +74,7 @@ public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegi
         this.configurableListableBeanFactory = beanFactory;
 
 //        BeanDefinition springTest3BeanDefinition = beanFactory.getBeanDefinition(SpringTest3.class.getCanonicalName());
-//        SpringTest3 springTest3 = (SpringTest3) beanFactory.getBean(SpringTest3.class.getCanonicalName());
-          SpringTest4 springTest4 = (SpringTest4) beanFactory.getBean(SpringTest4.class);
+        //SpringTest3 springTest3 = (SpringTest3) beanFactory.getBean(SpringTest3.class.getCanonicalName());
+        //SpringTest4 springTest4 = (SpringTest4) beanFactory.getBean(SpringTest4.class);
     }
 }
