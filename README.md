@@ -1,2 +1,2 @@
 # 博客
-# 讲解本项目博客地址：https://www.jianshu.com/p/61d4e28ee254
+## 使用Hibernate、JPA、Lombok遇到的有趣问题：https://www.jianshu.com/p/61d4e28ee254
