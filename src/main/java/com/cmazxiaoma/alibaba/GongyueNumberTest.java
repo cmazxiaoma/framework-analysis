@@ -12,7 +12,6 @@ public class GongyueNumberTest {
 
     public static int number2 = 82468264;
 
-
     public static void main(String[] args) {
         long start1 = System.currentTimeMillis();
         int result1 = gcd1(number1, number2);
