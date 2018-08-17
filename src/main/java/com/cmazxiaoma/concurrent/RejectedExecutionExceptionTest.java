@@ -21,12 +21,12 @@ public class RejectedExecutionExceptionTest {
      */
     public static void test1() {
         CustomThreadPoolExecutor customThreadPoolExecutor =
-                new CustomThreadPoolExecutor(2, 2,
+                new CustomThreadPoolExecutor(2, 3,
                         0L,
                         TimeUnit.SECONDS,
                         new ArrayBlockingQueue<Runnable>(10));
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 14; i++) {
             CustomThreadPoolExecutor.CustomTask customTask
                     = new CustomThreadPoolExecutor.CustomTask(new Runnable() {
                 @Override
