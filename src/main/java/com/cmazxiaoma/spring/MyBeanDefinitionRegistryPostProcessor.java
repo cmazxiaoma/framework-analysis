@@ -1,5 +1,6 @@
 package com.cmazxiaoma.spring;
 
+import com.cmazxiaoma.spring.bean.SpringTest2;
 import com.cmazxiaoma.spring.bean.SpringTest3;
 import com.cmazxiaoma.spring.bean.SpringTestBean;
 import com.cmazxiaoma.spring.compoent.SpringTest4;
@@ -65,6 +66,10 @@ public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegi
 
             // 返回这个bean的属性
             MutablePropertyValues mutablePropertyValues = beanDefinition.getPropertyValues();
+
+            if (beanName.equalsIgnoreCase(SpringTest2.class.getCanonicalName())) {
+                mutablePropertyValues.addPropertyValue("name", "github");
+            }
             registry.registerBeanDefinition(beanName, beanDefinition);
         }
     }

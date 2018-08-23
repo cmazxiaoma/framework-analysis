@@ -18,7 +18,7 @@ public class CountDownLatchTest {
      * @param args
      */
     public static void main(String[] args) {
-        test2();
+        test1();
     }
 
     public static void test1() {
@@ -32,11 +32,16 @@ public class CountDownLatchTest {
             CustomThreadPoolExecutor.CustomTask task = new CustomThreadPoolExecutor.CustomTask(new Runnable() {
                 @Override
                 public void run() {
-                    System.out.println("子线程" + Thread.currentThread().getName()
-                            + "正在执行...");
-                    System.out.println("子线程" + Thread.currentThread().getName()
-                            + "执行完毕...");
-                    countDownLatch.countDown();
+                    try {
+                        TimeUnit.SECONDS.sleep(2);
+                        System.out.println("子线程" + Thread.currentThread().getName()
+                                + "正在执行...");
+                        System.out.println("子线程" + Thread.currentThread().getName()
+                                + "执行完毕...");
+                        countDownLatch.countDown();
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }, "success");
             executorService.submit(task);

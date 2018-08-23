@@ -1,6 +1,7 @@
 package com.cmazxiaoma.spring;
 
 import com.cmazxiaoma.InitSpringTest;
+import com.cmazxiaoma.spring.bean.SpringTest2;
 import com.cmazxiaoma.spring.bean.SpringTest3;
 import com.cmazxiaoma.spring.bean.SpringTestBean;
 import com.cmazxiaoma.spring.compoent.SpringTest4;
@@ -27,6 +28,9 @@ public class SpringTest extends InitSpringTest {
     @Autowired
     private SpringTest4 springTest4;
 
+    @Autowired
+    private SpringTest2 springTest2;
+
     @Test
     public void test() {
         System.out.println("springTest3=" + springTest3);
@@ -45,6 +49,11 @@ public class SpringTest extends InitSpringTest {
     @Test
     public void test4() {
         System.out.println("springTest4=" + springTest4);
+    }
+
+    @Test
+    public void test5() {
+        System.out.println(springTest2.toString());
     }
 
 }
