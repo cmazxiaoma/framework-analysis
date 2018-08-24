@@ -22,6 +22,7 @@ public class LoopReferenceTest extends InitSpringTest {
 
     @Test
     public void test() {
-
+        System.out.println(loopReferenceA);
+        System.out.println(loopReferenceB);
     }
 }
