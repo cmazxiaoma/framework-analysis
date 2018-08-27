@@ -20,12 +20,13 @@ public abstract class BaseController1 {
 
     protected HttpSession httpSession;
 
+
     @ModelAttribute
-    public void init(HttpServletRequest request,
+    public synchronized void init(HttpServletRequest request,
                      HttpServletResponse response,
                      HttpSession httpSession) {
-        this.request = request;
-        this.response = response;
-        this.httpSession = httpSession;
+            this.request = request;
+            this.response = response;
+            this.httpSession = httpSession;
     }
 }
