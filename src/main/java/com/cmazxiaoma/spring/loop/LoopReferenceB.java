@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
  * @date 2018/8/14 15:43
  */
 @Component
-@Scope("prototype")
 public class LoopReferenceB {
 
     @Autowired

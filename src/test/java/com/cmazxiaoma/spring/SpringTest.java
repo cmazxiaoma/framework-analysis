@@ -6,8 +6,11 @@ import com.cmazxiaoma.spring.bean.SpringTest3;
 import com.cmazxiaoma.spring.bean.SpringTestBean;
 import com.cmazxiaoma.spring.compoent.SpringTest4;
 import com.cmazxiaoma.spring.lazy.Hero;
+import com.cmazxiaoma.spring.multipleBeans.IBeanService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Map;
 
 /**
  * @author cmazxiaoma
@@ -30,6 +33,9 @@ public class SpringTest extends InitSpringTest {
 
     @Autowired
     private SpringTest2 springTest2;
+
+    @Autowired
+    private IBeanService beanService;
 
     @Test
     public void test() {
@@ -54,6 +60,11 @@ public class SpringTest extends InitSpringTest {
     @Test
     public void test5() {
         System.out.println(springTest2.toString());
+    }
+
+    @Test
+    public void test6() {
+        System.out.println("beanService" + beanService);
     }
 
 }
