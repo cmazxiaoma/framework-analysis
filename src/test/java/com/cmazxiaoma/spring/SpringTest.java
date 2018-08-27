@@ -9,6 +9,7 @@ import com.cmazxiaoma.spring.lazy.Hero;
 import com.cmazxiaoma.spring.multipleBeans.IBeanService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class SpringTest extends InitSpringTest {
     private SpringTest2 springTest2;
 
     @Autowired
-    private IBeanService beanService;
+    private ApplicationContext applicationContext;
 
     @Test
     public void test() {
@@ -64,7 +65,7 @@ public class SpringTest extends InitSpringTest {
 
     @Test
     public void test6() {
-        System.out.println("beanService" + beanService);
+        System.out.println("beanService" + applicationContext.getBeansOfType(IBeanService.class));
     }
 
 }
