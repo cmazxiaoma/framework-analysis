@@ -7,6 +7,7 @@
 #### 2.[看ThreadPoolExecutor源码前的骚操作](https://www.jianshu.com/p/4b94b7ae684b)
 #### 3.[JUC之CountDownLatch的源码和使用场景分析](https://www.jianshu.com/p/fa496f7bc553)
 #### 4.[通过循环引用问题来分析Spring源码](https://www.jianshu.com/p/768525bf9f30)
+#### 5.[SpringMVC中出现的线程安全问题分析](https://www.jianshu.com/p/672a8ecada6c)
 
 还有在这个项目之前写的关于SpringMVC核心源码分析
 #### 1.[你真的会用HttpMessageConverter吗?](https://www.jianshu.com/p/0aaeb4144489)
