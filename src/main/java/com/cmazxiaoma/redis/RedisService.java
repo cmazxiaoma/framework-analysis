@@ -12,6 +12,7 @@ import redis.clients.jedis.ScanParams;
 import redis.clients.jedis.ScanResult;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -91,6 +92,7 @@ public class RedisService {
         }
     }
 
+
     public void unlock(KeyPrefix prefix, String key, String value) {
         Jedis jedis = null;
         try {
@@ -107,6 +109,61 @@ public class RedisService {
         } finally {
             returnToPool(jedis);
         }
+    }
+
+    public boolean lock1(KeyPrefix prefix, String key, String value, Long lockExpireTimeOut,
+                         Long lockWaitTimeOut) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            String realKey = prefix.getPrefix() + key;
+            Long deadTimeLine = System.currentTimeMillis() + lockWaitTimeOut;
+
+            for (;;) {
+                String result = jedis.set(realKey, value, "NX", "PX", lockExpireTimeOut);
+
+                if ("1".equals(result)) {
+                    return true;
+                }
+
+                lockWaitTimeOut = deadTimeLine - System.currentTimeMillis();
+
+                if (lockWaitTimeOut <= 0L) {
+                    return false;
+                }
+            }
+        } catch (Exception ex) {
+            log.info("lock error");
+        } finally {
+            returnToPool(jedis);
+        }
+
+        return false;
+    }
+
+    public boolean unlock1(KeyPrefix prefix, String key, String value) {
+
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            String realKey = prefix.getPrefix() + key;
+
+            String luaScript = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
+
+            Object result = jedis.eval(luaScript, Collections.singletonList(realKey),
+                    Collections.singletonList(value));
+
+            if ("1".equals(result)) {
+                return true;
+            }
+
+        } catch (Exception ex) {
+            log.info("unlock error");
+        } finally {
+            returnToPool(jedis);
+        }
+        return false;
+
     }
 
     /**

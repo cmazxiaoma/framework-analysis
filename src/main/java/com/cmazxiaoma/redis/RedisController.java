@@ -99,7 +99,7 @@ public class RedisController {
 
     public void doSomeThing() {
         try {
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(100);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
