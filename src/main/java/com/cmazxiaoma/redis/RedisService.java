@@ -14,6 +14,7 @@ import redis.clients.jedis.ScanResult;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -54,31 +55,40 @@ public class RedisService {
 
     public boolean lock(KeyPrefix prefix, String key, String value) {
         Jedis jedis = null;
+        Long lockWaitTimeOut = 200L;
+        Long deadTimeLine = System.currentTimeMillis() + lockWaitTimeOut;
+
         try {
             jedis = jedisPool.getResource();
             String realKey = prefix.getPrefix() + key;
 
-            if (jedis.setnx(realKey, value) == 1) {
-                return true;
-            }
-
-            String currentValue = jedis.get(realKey);
-
-            // if lock is expired
-            if (!StringUtils.isEmpty(currentValue) &&
-                    Long.valueOf(currentValue) < System.currentTimeMillis()) {
-                // gets last lock time
-                String oldValue = jedis.getSet(realKey, value);
-
-                if (!StringUtils.isEmpty(oldValue) && oldValue.equals(currentValue)) {
+            for (;;) {
+                if (jedis.setnx(realKey, value) == 1) {
                     return true;
+                }
+
+                String currentValue = jedis.get(realKey);
+
+                // if lock is expired
+                if (!StringUtils.isEmpty(currentValue) &&
+                        Long.valueOf(currentValue) < System.currentTimeMillis()) {
+                    // gets last lock time
+                    String oldValue = jedis.getSet(realKey, value);
+
+                    if (!StringUtils.isEmpty(oldValue) && oldValue.equals(currentValue)) {
+                        return true;
+                    }
+                }
+
+                lockWaitTimeOut = deadTimeLine - System.currentTimeMillis();
+
+                if (lockWaitTimeOut <= 0L) {
+                    return false;
                 }
             }
         } finally {
             returnToPool(jedis);
         }
-
-        return false;
     }
 
     public void unlock(KeyPrefix prefix, String key, String value) {

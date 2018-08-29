@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.LongAdder;
 
 /**
@@ -20,7 +21,8 @@ import java.util.concurrent.atomic.LongAdder;
 public class RedisController {
 
     private static LongAdder longAdder = new LongAdder();
-    private static Long TIME_OUT = 1000L;
+    private static Long LOCK_EXPIRE_TIME = 200L;
+    private static Long stock = 10000L;
 
     @Autowired
     private RedisService redisService;
@@ -29,18 +31,25 @@ public class RedisController {
         longAdder.add(10000L);
     }
 
-    @GetMapping("/seckill")
-    public String seckill() {
-        Long time = System.currentTimeMillis() + TIME_OUT;
+    @GetMapping("/v1/seckill")
+    public String seckillV1() {
+        Long time = System.currentTimeMillis() + LOCK_EXPIRE_TIME;
         if (!redisService.lock(SeckillKeyPrefix.seckillKeyPrefix, "redis-seckill", String.valueOf(time))) {
             return "人太多了，换个姿势操作一下";
         }
 
-        if (longAdder.intValue() == 0) {
+        if (longAdder.longValue() == 0L) {
+            return "已抢光";
+        }
+
+        doSomeThing();
+
+        if (longAdder.longValue() == 0L) {
             return "已抢光";
         }
 
         longAdder.decrement();
+
         redisService.unlock(SeckillKeyPrefix.seckillKeyPrefix, "redis-seckill", String.valueOf(time));
 
         Long stock = longAdder.longValue();
@@ -54,5 +63,47 @@ public class RedisController {
         Long bought = 10000L - stock;
         return "已抢" + bought + ", 还剩下" + stock;
     }
+
+    @GetMapping("/v2/seckill")
+    public String seckillV2() {
+        if (longAdder.longValue() == 0L) {
+            return "已抢光";
+        }
+
+        doSomeThing();
+
+        if (longAdder.longValue() == 0L) {
+            return "已抢光";
+        }
+
+        longAdder.decrement();
+
+        Long stock = longAdder.longValue();
+        Long bought = 10000L - stock;
+        return "已抢" + bought + ", 还剩下" + stock;
+    }
+
+    @GetMapping("/v3/seckill")
+    public String seckillV3() {
+        if (stock == 0) {
+            return "已抢光";
+        }
+
+        doSomeThing();
+        stock--;
+
+        Long bought = 10000L - stock;
+        return "已抢" + bought + ", 还剩下" + stock;
+    }
+
+
+    public void doSomeThing() {
+        try {
+            TimeUnit.MILLISECONDS.sleep(200);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
 }

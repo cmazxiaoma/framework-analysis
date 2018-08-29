@@ -1,6 +1,8 @@
 package com.cmazxiaoma.redis;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -11,8 +13,9 @@ import org.springframework.stereotype.Component;
  * @Description: TODO
  * @date 2018/5/9 23:44
  */
-@Data
 @Component
+@Getter
+@Setter
 @ConfigurationProperties(prefix = "spring.redis")
 public class RedisConfig {
 
