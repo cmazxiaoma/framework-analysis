@@ -122,7 +122,7 @@ public class RedisService {
             for (;;) {
                 String result = jedis.set(realKey, value, "NX", "PX", lockExpireTimeOut);
 
-                if ("1".equals(result)) {
+                if ("OK".equals(result)) {
                     return true;
                 }
 

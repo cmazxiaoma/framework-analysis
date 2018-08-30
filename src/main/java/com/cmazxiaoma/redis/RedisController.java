@@ -22,6 +22,7 @@ public class RedisController {
 
     private static LongAdder longAdder = new LongAdder();
     private static Long LOCK_EXPIRE_TIME = 200L;
+    private static Long LOCK_WAIT_TIME = 50L;
     private static Long stock = 10000L;
 
     @Autowired
@@ -95,6 +96,36 @@ public class RedisController {
         Long bought = 10000L - stock;
         return "已抢" + bought + ", 还剩下" + stock;
     }
+
+
+    @GetMapping("/v4/seckill")
+    public String seckillV4() {
+        String lockId = IdUtil.gen();
+
+        if (!redisService.lock1(SeckillKeyPrefix.seckillKeyPrefix, "redis-seckill", lockId,
+                LOCK_EXPIRE_TIME, LOCK_WAIT_TIME)) {
+            return "人太多了，换个姿势操作一下";
+        }
+
+        if (longAdder.longValue() == 0L) {
+            return "已抢光";
+        }
+
+        doSomeThing();
+
+        if (longAdder.longValue() == 0L) {
+            return "已抢光";
+        }
+
+        longAdder.decrement();
+
+        redisService.unlock1(SeckillKeyPrefix.seckillKeyPrefix, "redis-seckill", lockId);
+
+        Long stock = longAdder.longValue();
+        Long bought = 10000L - stock;
+        return "已抢" + bought + ", 还剩下" + stock;
+    }
+
 
 
     public void doSomeThing() {
