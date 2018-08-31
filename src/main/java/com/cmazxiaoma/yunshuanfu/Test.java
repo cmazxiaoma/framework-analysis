@@ -18,6 +18,7 @@ public class Test {
         if (isFlag() && print()) {
             System.out.println("gg");
         }
+
     }
 
     public static boolean isFlag() {

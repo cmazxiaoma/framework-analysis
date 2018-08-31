@@ -1,6 +1,7 @@
 package com.cmazxiaoma.redis;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 
@@ -111,6 +115,31 @@ public class RedisService {
         }
     }
 
+
+    private volatile boolean isPollingToAddLockTimeOut = false;
+
+    public void doAddLockTimeOutTask() {
+        ThreadFactory threadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("addLockTimeOut-pool-%d")
+                .build();
+
+        ThreadPoolExecutor threadPoolExecutor =
+                new ThreadPoolExecutor(1, 1, 0L, TimeUnit.SECONDS,
+                        new ArrayBlockingQueue<Runnable>(1), threadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        threadPoolExecutor.submit(new AddLockTimeOutTask());
+        threadPoolExecutor.shutdown();
+    }
+
+    public static class AddLockTimeOutTask implements Runnable {
+
+        @Override
+        public void run() {
+            //
+        }
+    }
+
+
     public boolean lock1(KeyPrefix prefix, String key, String value, Long lockExpireTimeOut,
                          Long lockWaitTimeOut) {
         Jedis jedis = null;
@@ -156,7 +185,6 @@ public class RedisService {
             if ("1".equals(result)) {
                 return true;
             }
-
         } catch (Exception ex) {
             log.info("unlock error");
         } finally {
