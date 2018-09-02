@@ -15,9 +15,37 @@ public class NodeTest {
         node.nextWaiter = new Node(Thread.currentThread(), -1);
 
         Node next = node.nextWaiter;
-        node.nextWaiter = null;
+        node.nextWaiter = new Node(Thread.currentThread(), -2);
 
         System.out.println(next);
+
+        Cart firstCart = new Cart(1);
+        Cart nextCart = firstCart;
+        firstCart.setCount(2);
+        firstCart = new Cart(3);
+
+        System.out.println(firstCart);
+        System.out.println(nextCart);
+
+    }
+
+    static final class Cart {
+        private int count;
+
+        public Cart(int count) {
+            this.count = count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
+        @Override
+        public String toString() {
+            return "Cart{" +
+                    "count=" + count +
+                    '}';
+        }
     }
 
     static final class Node {
