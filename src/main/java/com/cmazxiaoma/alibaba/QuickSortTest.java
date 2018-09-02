@@ -15,11 +15,11 @@ public class QuickSortTest {
 
 //        sortByRecursion2(0, array.length - 1);
 
-//        insertSort();
+          insertSort();
 
 //        bubbleSort();
 
-        selectionSort();
+//        selectionSort();
 
         for (int i = 0; i < array.length; i++) {
             System.out.println(array[i]);
