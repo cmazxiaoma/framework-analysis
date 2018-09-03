@@ -15,7 +15,7 @@ public class NodeTest {
         node.nextWaiter = new Node(Thread.currentThread(), -1);
 
         Node next = node.nextWaiter;
-        node.nextWaiter = new Node(Thread.currentThread(), -2);
+        node.nextWaiter = null;
 
         System.out.println(next);
 
@@ -23,6 +23,7 @@ public class NodeTest {
         Cart nextCart = firstCart;
         firstCart.setCount(2);
         firstCart = new Cart(3);
+        firstCart = null;
 
         System.out.println(firstCart);
         System.out.println(nextCart);
