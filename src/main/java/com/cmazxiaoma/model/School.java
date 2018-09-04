@@ -21,8 +21,8 @@ import java.util.Set;
 @Table(name = "tbl_school")
 @Setter
 @Getter
-@DynamicUpdate
-@DynamicInsert
+@DynamicUpdate(value = true)
+@DynamicInsert(value = true)
 public class School implements Serializable {
 
     @Id

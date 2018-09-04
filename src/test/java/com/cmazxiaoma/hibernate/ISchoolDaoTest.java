@@ -141,4 +141,14 @@ public class ISchoolDaoTest extends InitSpringTest {
         System.out.println("student1=" + student1);
     }
 
+    @Test
+    public void updateStudent() {
+        for (int i = 0; i < 3; i++) {
+            Student student = new Student();
+            student.setId("4");
+            student.setStudentName("大哥4");
+            studentDao.save(student);
+        }
+    }
+
 }

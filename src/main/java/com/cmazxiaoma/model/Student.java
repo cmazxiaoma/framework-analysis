@@ -19,8 +19,8 @@ import java.util.Date;
 @Table(name = "tbl_student")
 @Setter
 @Getter
-@DynamicUpdate
-@DynamicInsert
+@DynamicUpdate(value = true)
+@DynamicInsert(value = true)
 public class Student implements Serializable {
 
     @Id
@@ -65,22 +65,28 @@ public class Student implements Serializable {
 
         Student student = (Student) o;
 
-        if (!getId().equals(student.getId())) return false;
-        if (!getStudentName().equals(student.getStudentName())) return false;
-        if (!getSchoolId().equals(student.getSchoolId())) return false;
-        if (!getCreatedDt().equals(student.getCreatedDt())) return false;
-        if (!getUpdatedDt().equals(student.getUpdatedDt())) return false;
-        return getIsDel().equals(student.getIsDel());
+        if (getId() != null ? !getId().equals(student.getId()) : student.getId() != null) return false;
+        if (getStudentName() != null ? !getStudentName().equals(student.getStudentName()) : student.getStudentName() != null)
+            return false;
+        if (getSchoolId() != null ? !getSchoolId().equals(student.getSchoolId()) : student.getSchoolId() != null)
+            return false;
+        if (getSchool() != null ? !getSchool().equals(student.getSchool()) : student.getSchool() != null) return false;
+        if (getCreatedDt() != null ? !getCreatedDt().equals(student.getCreatedDt()) : student.getCreatedDt() != null)
+            return false;
+        if (getUpdatedDt() != null ? !getUpdatedDt().equals(student.getUpdatedDt()) : student.getUpdatedDt() != null)
+            return false;
+        return getIsDel() != null ? getIsDel().equals(student.getIsDel()) : student.getIsDel() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getStudentName().hashCode();
-        result = 31 * result + getSchoolId().hashCode();
-        result = 31 * result + getCreatedDt().hashCode();
-        result = 31 * result + getUpdatedDt().hashCode();
-        result = 31 * result + getIsDel().hashCode();
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getStudentName() != null ? getStudentName().hashCode() : 0);
+        result = 31 * result + (getSchoolId() != null ? getSchoolId().hashCode() : 0);
+        result = 31 * result + (getSchool() != null ? getSchool().hashCode() : 0);
+        result = 31 * result + (getCreatedDt() != null ? getCreatedDt().hashCode() : 0);
+        result = 31 * result + (getUpdatedDt() != null ? getUpdatedDt().hashCode() : 0);
+        result = 31 * result + (getIsDel() != null ? getIsDel().hashCode() : 0);
         return result;
     }
 }
