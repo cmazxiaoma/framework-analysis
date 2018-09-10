@@ -39,4 +39,16 @@ public class RedisConfig {
 
     @Value("${spring.redis.pool.max-wait}")
     private int poolMaxWait;
+
+    @Value("${spring.redis.sentinel.master}")
+    private String sentinelMaster;
+
+    @Value("${spring.redis.sentinel.nodes}")
+    private String sentinelNodes;
+
+    @Value("${spring.redis.sentinel.timeout}")
+    private int sentinelTimeOut;
+
+    @Value("${spring.redis.sentinel.password}")
+    private String sentinelPassword;
 }
