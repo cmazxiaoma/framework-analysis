@@ -3,6 +3,7 @@ package com.cmazxiaoma.hibernate;
 import com.cmazxiaoma.InitSpringTest;
 import com.cmazxiaoma.model.School;
 import com.cmazxiaoma.model.Student;
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

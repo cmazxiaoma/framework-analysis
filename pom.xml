@@ -167,6 +167,11 @@
 			<version>4.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.csource</groupId>
+			<artifactId>fastdfs-client-java</artifactId>
+			<version>1.27-SNAPSHOT</version>
+		</dependency>
 
 		<!--&lt;!&ndash;spring boot tomcat-->
 <!--默认可以不用配置，但当需要把当前web应用布置到外部servlet容器时就需要配置，并将scope配置为provided&ndash;&gt;-->
@@ -175,6 +180,13 @@
 			<!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
 			<!--<scope>provided</scope>-->
 		<!--</dependency>-->
+
+		<!--阿里 Druid Spring Boot Starter依赖-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid-spring-boot-starter.version}</version>
+		</dependency>
 
 	</dependencies>
 
