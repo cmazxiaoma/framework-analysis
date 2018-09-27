@@ -7,6 +7,7 @@
 
 package com.cmazxiaoma.spring.inject;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
  * 创建时间： 2018-9-26
  */
 @Component
+@Lazy
 public class MyBaseDao extends MyHibernateDaoSupport {
 
 }

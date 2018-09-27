@@ -3,6 +3,7 @@ package com.cmazxiaoma.spring.inject;
 import com.cmazxiaoma.InitSpringTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 /**
  * @author cmazxiaoma
@@ -12,11 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class InjectTest extends InitSpringTest {
 
+//    @Autowired
+//    private MyBaseDao myBaseDao;
+
     @Autowired
-    private MyBaseDao myBaseDao;
+    private ApplicationContext applicationContext;
 
     @Test
     public void test1() {
+        MyBaseDao myBaseDao = applicationContext.getBean(MyBaseDao.class);
         System.out.println(myBaseDao.getTemplate());
     }
 }

@@ -36,7 +36,6 @@ public class HibernateConfig {
         if (entityManagerFactory.unwrap(SessionFactory.class) == null) {
             throw new NullPointerException("factory is not hibernate factory");
         }
-
         return entityManagerFactory.unwrap(SessionFactory.class);
     }
 }

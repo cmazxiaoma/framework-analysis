@@ -8,6 +8,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author cmazxiaoma
@@ -16,15 +17,16 @@ import org.springframework.stereotype.Repository;
  * @date 2018/9/20 17:58
  */
 @Component
-public class MyHibernateSupport extends HibernateDaoSupport {
+@Transactional
+public class MyCommonDao extends HibernateDaoSupport {
 
-    @Autowired
-    public void setSessionFactoryOverride(SessionFactory sessionFactory) {
-        super.setSessionFactory(sessionFactory);
-    }
+//    @Autowired
+//    public void setSessionFactoryOverride(SessionFactory sessionFactory) {
+//        super.setSessionFactory(sessionFactory);
+//    }
 
-    public void test() {
-        getSessionFactory().getCurrentSession();
+    public String list() {
         this.getSessionFactory().getCurrentSession();
+        return "success";
     }
 }

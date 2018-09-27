@@ -1,7 +1,8 @@
 package com.cmazxiaoma.hibernate;
 
 import com.cmazxiaoma.InitSpringTest;
-import com.cmazxiaoma.MyHibernateSupport;
+//import com.cmazxiaoma.MyHibernateSupport;
+import com.cmazxiaoma.MyCommonDao;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.context.ApplicationContext;
  * @Description: TODO
  * @date 2018/9/20 17:59
  */
-public class MyHibernateSupportTest extends InitSpringTest {
+public class MyCommonDaoTest extends InitSpringTest {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -21,13 +22,14 @@ public class MyHibernateSupportTest extends InitSpringTest {
     @Autowired
     private ApplicationContext applicationContext;
 
+    @Autowired
+    private MyCommonDao myCommonDao;
 
     @Test
     public void test() {
-        SessionFactory sessionFactory = (SessionFactory) applicationContext.getBean("sessionFactory");
+        SessionFactory sessionFactory = (SessionFactory)
+                applicationContext.getBean("sessionFactory");
         System.out.println(sessionFactory);
-
-        MyHibernateSupport myHibernateSupport = applicationContext.getBean(MyHibernateSupport.class);
-        System.out.println(myHibernateSupport);
+        System.out.println(myCommonDao.list());
     }
 }
