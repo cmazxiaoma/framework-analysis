@@ -1,5 +1,7 @@
 package com.cmazxiaoma.concurrent.blockingqueue;
 
+import org.springframework.web.util.HtmlUtils;
+
 /**
  * @author cmazxiaoma
  * @version V1.0
@@ -30,6 +32,7 @@ public class PriorityTask implements Comparable<PriorityTask> {
 
     @Override
     public String toString() {
+
         return "PriorityTask{" +
                 "num=" + num +
                 '}';
