@@ -19,43 +19,29 @@ public class Test {
     public static void main(String[] args) throws InterruptedException {
         List<PriorityTask> priorityTaskList = new ArrayList<>();
 
-        priorityTaskList.add(new PriorityTask(1));
-        priorityTaskList.add(new PriorityTask(2));
-        priorityTaskList.add(new PriorityTask(3));
-        priorityTaskList.add(new PriorityTask(4));
         priorityTaskList.add(new PriorityTask(5));
+        priorityTaskList.add(new PriorityTask(4));
+        priorityTaskList.add(new PriorityTask(3));
+        priorityTaskList.add(new PriorityTask(2));
+        priorityTaskList.add(new PriorityTask(1));
 
         Collections.sort(priorityTaskList);
-
         System.out.println(priorityTaskList.toString());
 
-        PriorityBlockingQueue<PriorityTask> blockingQueue = new PriorityBlockingQueue<>(1);
-        blockingQueue.put(priorityTaskList.get(0));
-        blockingQueue.put(priorityTaskList.get(1));
-        blockingQueue.put(priorityTaskList.get(2));
-        blockingQueue.put(priorityTaskList.get(3));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
-        blockingQueue.put(priorityTaskList.get(4));
+        PriorityBlockingQueue<PriorityTask> blockingQueue = new PriorityBlockingQueue<>(5);
+        blockingQueue.put(new PriorityTask(5));
+        blockingQueue.put(new PriorityTask(3));
+        blockingQueue.put(new PriorityTask(4));
+        blockingQueue.put(new PriorityTask(1));
+        blockingQueue.put(new PriorityTask(2));
 
 
-        System.out.println(blockingQueue.toString());
+        System.out.println("take:" + blockingQueue.take());
+        System.out.println("take:" + blockingQueue.take());
+        System.out.println("take:" + blockingQueue.take());
+        System.out.println("take:" + blockingQueue.take());
+        System.out.println("take:" + blockingQueue.take());
+        System.out.println("take:" + blockingQueue.take());
 
 
 
