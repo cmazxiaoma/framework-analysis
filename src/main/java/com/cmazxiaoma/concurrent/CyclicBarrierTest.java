@@ -225,5 +225,6 @@ public class CyclicBarrierTest {
             }
         }
         executorService.shutdown();
+        System.out.println(executorService.toString());
     }
 }
