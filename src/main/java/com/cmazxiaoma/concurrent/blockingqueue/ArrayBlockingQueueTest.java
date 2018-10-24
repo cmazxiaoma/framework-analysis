@@ -14,11 +14,12 @@ public class ArrayBlockingQueueTest {
 
     public static void main(String[] args) throws InterruptedException {
         long start = System.currentTimeMillis();
-        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<String>(10);
+        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<String>(1);
 
         blockingQueue.offer("1", 10L, TimeUnit.SECONDS);
         String s = blockingQueue.poll(10L, TimeUnit.SECONDS);
         System.out.println("s=" + s);
+        System.out.println(blockingQueue.toString());
 
         blockingQueue.offer("2", 10L, TimeUnit.SECONDS);
         System.out.println(blockingQueue.toString());

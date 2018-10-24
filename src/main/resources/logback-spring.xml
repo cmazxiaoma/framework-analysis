@@ -2,7 +2,7 @@
 
 <configuration>
 
-    <property name="LOG_HOME" value="D:/logs/mallSeckill"></property>
+    <property name="LOG_HOME" value="D:/logs/demo"></property>
 
     <property name="LOG_FORMAT" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%class %line] :%msg%n"></property>
 
