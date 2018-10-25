@@ -1,5 +1,6 @@
 package com.cmazxiaoma.elasticsearch;
 
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.delete.DeleteResponse;
@@ -146,7 +147,7 @@ public class ElasticSearchController {
             rangeQueryBuilder.to(ltwordCount);
         }
         if (page <= 1) {
-            page = 1;
+            page = 0;
         } else {
             page = page - 1;
         }
@@ -158,10 +159,13 @@ public class ElasticSearchController {
                 .setFrom(page)
                 .setSize(pageSize);
         SearchResponse searchResponse = searchRequestBuilder.get();
+        Map<String, Object> resultMap = Maps.newHashMap();
+        resultMap.put("totalRecordCount", searchResponse.getHits().getTotalHits());
         List<Map<String, Object>> resultList = new ArrayList<>();
         for (SearchHit searchHit : searchResponse.getHits()) {
             resultList.add(searchHit.getSourceAsMap());
         }
-        return ResultVoGenerator.genSuccessResult(resultList);
+        resultMap.put("list", resultList);
+        return ResultVoGenerator.genSuccessResult(resultMap);
     }
 }
