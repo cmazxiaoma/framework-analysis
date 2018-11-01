@@ -21,7 +21,7 @@ import java.util.Set;
  * @date 2018/5/9 23:51
  */
 @Component
-public class RedisPoolFactory extends CachingConfigurerSupport {
+public class RedisPoolFactory {
 
     @Autowired
     private RedisConfig redisConfig;
