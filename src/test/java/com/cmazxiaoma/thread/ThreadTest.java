@@ -8,6 +8,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author cmazxiaoma
  * @version V1.0
@@ -23,14 +26,19 @@ public class ThreadTest extends InitSpringTest {
     private IStudentDao studentDao;
 
     @Test
-    @Transactional
-    public void threadTest() {
-        System.out.println("test");
-        new Thread(new Runnable() {
+    public void threadTest() throws InterruptedException {
+        System.out.println("==================start");
+
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                studentDao.findAll();
+                System.out.println("=================thread");
+                schoolMapper.findOneByV1("1");
+                studentDao.findOne("1");
             }
-        }).start();
+        });
+        thread.start();
+        thread.join();
+        System.out.println("==================end");
     }
 }
