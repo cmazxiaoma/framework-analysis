@@ -3,10 +3,14 @@ package com.cmazxiaoma.hibernate;
 import com.cmazxiaoma.InitSpringTest;
 import com.cmazxiaoma.model.School;
 import com.cmazxiaoma.model.Student;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author cmazxiaoma
@@ -59,7 +63,6 @@ public class ISchoolDaoTest extends InitSpringTest {
     @Test
     public void merge() {
         Student student =  studentDao.findOne("1");
-
         student.setStudentName(student.getStudentName() + "v1.2");
         studentDao.save(student);
 
@@ -130,6 +133,7 @@ public class ISchoolDaoTest extends InitSpringTest {
     public void detach() {
         Student student = studentDao.findOne("1");
         System.out.println("student=" + student);
+
         School school = student.getSchool();
         System.out.println("school=" + school);
 
@@ -142,13 +146,34 @@ public class ISchoolDaoTest extends InitSpringTest {
     }
 
     @Test
-    public void updateStudent() {
+    public void updateStudentBatch() throws InterruptedException {
         for (int i = 0; i < 3; i++) {
+            Date date = new Date();
+            System.out.println("第" + (i + 1) + "次, "+ DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
             Student student = new Student();
-            student.setId("4");
-            student.setStudentName("大哥4");
+            student.setId("1");
+            student.setStudentName("彭赛是傻逼123");
+            student.setUpdatedDt(date);
             studentDao.save(student);
+            // TimeUnit.SECONDS.sleep(5);
         }
     }
 
+    /**
+     * 如果你不是通过Repository获取的实体对象，而是自己定义实体对象并对主键赋值，
+     * 想达到更新部分字段的目的，那么你通过save()方法更新字段后会出现未定义的字段为NULL的情况。
+     */
+    @Test
+    public void updateStudentOne() {
+        Student student = new Student();
+        student.setId("1");
+        student.setStudentName("彭赛");
+        studentDao.save(student);
+    }
+
+    @Test
+    public void testStudent() {
+        Student student = studentDao.findOne("1");
+        System.out.println(student.toString());
+    }
 }
