@@ -1,7 +1,6 @@
 package com.cmazxiaoma.concurrent;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.*;
 
 /**
  * @author cmazxiaoma
@@ -20,6 +19,10 @@ public class ThreadTest {
         ThreadFactory threadFactory = Executors.defaultThreadFactory();
         Thread thread = threadFactory.newThread(Thread.currentThread());
         System.out.println(thread.getId() + ":" + thread.getName());
+
+        ThreadPoolExecutor threadPoolExecutor =
+                new ThreadPoolExecutor(1,1,0L, TimeUnit.SECONDS,
+                        new ArrayBlockingQueue<Runnable>(1));
     }
 
 }
