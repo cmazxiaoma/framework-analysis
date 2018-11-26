@@ -122,19 +122,21 @@ public class SizeOfObject {
         System.out.println(sizeOf(Integer.valueOf(1)));
         System.out.println(sizeOf(Double.valueOf(1)));
 
-        String s = new String("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        String s = new String("cmazxiaoma");
         System.out.println("string=" + sizeOf(s));
 
         // 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 12 + padding
         System.out.println("c:" + sizeOf(new C()));
         System.out.println(fullSizeOf(new C()));
 
-        // 对象总空间占有: 12 + 4 + 4 + 4 + (16 + ( (12 + 4 + 4 + padding) * 3) + padding) + (16 + ( 6 * 8 ) + padding) + 4 + 4 + (16 + ( 4 * 6) + padding) + padding
+        // 对象总空间占有: 12 + 4 + 4 + 4 + (16 + ( (12 + 4 + 4 + padding) * 3) + padding + 12)
+        // + (16 + ( 6 * 8 ) + padding) + 4 + 4 + (16 + ( 4 * 6) + padding) + padding + 4 + 4 + 4
 
         /**
-         *  1 => 24 + （16 + 72 + padding) + (64 + padding) + 8 + (40 + padding) + padding
-         *  2 => 24 + 88 + 64 + 8 + 40 + padding
-         *  3 => 224
+         *  1 => 24 + （16 + 72 + padding + 12) + (64 + padding) + 8 + (40 + padding) + padding + 12
+         *  2 => 24 + 104 + 64 + 8 + 40 + padding + 12
+         *  3 => 240 + 12 + padding
+         *  4 => 256
          */
 
 
@@ -148,15 +150,30 @@ public class SizeOfObject {
     }
 
     static class C extends B {
+        int ba;
         B[] as = new B[3];
+        long[] longArray = new long[6];
+        Integer integer;
+        B b;
+        int[] intArray = new int[6];
 
-        // 12 + 4 + 4 + (16 + (12 + 4 + 4 + padding) * 3 + padding) + padding
+//        /*
+//         20 + (16 + (12 + 4 + 4 + padding ) * 4 + padding + 16) + padding + 4
+//         = 20 + （16 + 96 + padding + 16) + padding + 4
+//         = 24 + padding + 128
+//         = 152
+//         */
+//        B[] as = new B[4];
 
-        // 20 + (16 +  72 + padding) + padding
+        // B类只有B[] as = new B[3]; 计算对象总空间占有大小
+        // 4 + 4 + 12 + (16 + (12 + 4 + 4 + padding) * 3 + padding + 12) + padding + 4
 
-        // 20 + 88 + padding
+        // 20 + (16 +  72 + padding + 12) + padding + 4
 
-        // 112
+        // 20 + 104 + padding + 4
+
+        // 128
+
         C() {
             for (int i = 0; i < as.length; i++) {
                 as[i] = new B();
