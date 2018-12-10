@@ -12,7 +12,7 @@ import java.util.concurrent.locks.LockSupport;
  * @Description: TODO
  * @date 2018/8/20 14:17
  */
-public class MyLock {
+public class  MyLock {
 
     private volatile int state = 0;
 

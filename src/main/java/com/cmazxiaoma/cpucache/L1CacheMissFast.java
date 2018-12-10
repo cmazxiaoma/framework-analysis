@@ -16,7 +16,7 @@ public class L1CacheMissFast {
 
     private static final int column = 6;
 
-    // long占8个字节  12 + 8 * 6 + padding = 64个字节 L1d Cache每个缓存块是64Byte
+    // long占8个字节  16 + 8 * 6 + padding = 64个字节 L1d Cache每个缓存块是64Byte
     private static long[][] longs;
 
     public static void main(String[] args) throws Exception {
@@ -39,7 +39,6 @@ public class L1CacheMissFast {
             final long start = System.nanoTime();
 
             //fast
-
             for (int i = 0; i < row; i++) {
                 for (int j = 0; j < column; j++) {
                     sum += longs[i][j];

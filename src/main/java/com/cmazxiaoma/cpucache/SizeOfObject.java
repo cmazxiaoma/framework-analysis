@@ -142,6 +142,18 @@ public class SizeOfObject {
 
         // 对象本身占有空间: 12 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + padding = 48
         System.out.println(ObjectSizeCalculator.getObjectSize(new C()));
+
+        MyVolatileVar[] myVolatileVars = new MyVolatileVar[4];
+        for (int i = 0; i < 4; i++) {
+            myVolatileVars[i] = new MyVolatileVar();
+        }
+
+        // 本身占有：16 + 4 * 4 + padding = 32
+        // 16 + 4 * 4 + padding = 32
+        System.out.println(sizeOf(myVolatileVars));
+        // 总空间占有：16 + 4 * 4 + padding + (12 + padding + 8) * 4 = 32 + 96 + padding = 128
+        // 16 + 4 * 4 + padding + (12 + padding + 7 * 8 ) * 4 = 32 + 72 * 4 + padding = 320
+        System.out.println(fullSizeOf(myVolatileVars));
     }
 
     static class B {
@@ -180,4 +192,10 @@ public class SizeOfObject {
             }
         }
     }
+
+    static class MyVolatileVar {
+        public volatile long value = 0L;
+        public long long1,long2,long3,long4,long5,long6;
+    }
+
 }
