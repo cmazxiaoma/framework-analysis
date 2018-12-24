@@ -1,14 +1,12 @@
 package com.cmazxiaoma.cpucache;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * @author cmazxiaoma
  * @version V1.0
  * @Description: TODO
  * @date 2018/11/26 22:02
  */
-public class FalseShareTest implements Runnable {
+public class FalseShareFastTest implements Runnable {
 
     public static int NUM_THREADS = 4;
     public static final long ITERATIONS = 500 * 1000 * 1000L;
@@ -16,7 +14,7 @@ public class FalseShareTest implements Runnable {
     public static MyVolatileLong[] myVolatileLongs;
     public static long SUM_TIME = 0L;
 
-    public FalseShareTest(int arrayIndex) {
+    public FalseShareFastTest(int arrayIndex) {
         this.arrayIndex = arrayIndex;
     }
 
@@ -47,7 +45,7 @@ public class FalseShareTest implements Runnable {
         Thread[] threads = new Thread[NUM_THREADS];
 
         for (int i = 0; i < threads.length; i++) {
-            threads[i] = new Thread(new FalseShareTest(i));
+            threads[i] = new Thread(new FalseShareFastTest(i));
         }
 
         for (Thread thread : threads) {

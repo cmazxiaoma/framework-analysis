@@ -20,7 +20,7 @@ public class L1CacheMissSlow {
     private static long[][] longs;
 
     public static void main(String[] args) throws Exception {
-        TimeUnit.SECONDS.sleep(30);
+        TimeUnit.SECONDS.sleep(1);
         longs = new long[row][];
 
         for (int i = 0; i < row; i++) {
@@ -54,7 +54,7 @@ public class L1CacheMissSlow {
             System.out.println("t=" + t + ",const=" + (System.nanoTime() - start) + "ns");
         }
 
-        TimeUnit.SECONDS.sleep(100);
+        TimeUnit.SECONDS.sleep(1);
 
     }
 }
