@@ -75,4 +75,9 @@ public class FalseShareFastTest implements Runnable {
         public volatile long value = 0L;
         public long long1,long2,long3,long4,long5,long6;
     }
+
+    public static long preventFromOptimization(MyVolatileLong myVolatileLong) {
+        return myVolatileLong.long1 + myVolatileLong.long2 + myVolatileLong.long3
+                + myVolatileLong.long4 + myVolatileLong.long5 + myVolatileLong.long6;
+    }
 }
