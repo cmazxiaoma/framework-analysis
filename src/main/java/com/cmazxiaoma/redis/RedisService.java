@@ -371,6 +371,28 @@ public class RedisService {
         }
     }
 
+    public <T> boolean setHash(KeyPrefix prefix, String key, T value) {
+        Jedis jedis = null;
+
+        try {
+            jedis = jedisPool.getResource();
+            String str = beanToString(value);
+
+            if (StringUtils.isEmpty(str)) {
+                return false;
+            }
+
+            //生成真正的key
+            String realKey = prefix.getPrefix() + key;
+            jedis.hset(realKey, key, str);
+
+            return true;
+        } finally {
+            returnToPool(jedis);
+        }
+    }
+
+
     /**
      * 将实体类转换成JSON字符串
      * @param value

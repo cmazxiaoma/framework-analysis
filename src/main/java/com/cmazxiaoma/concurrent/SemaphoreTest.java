@@ -12,11 +12,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class SemaphoreTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         test1();
     }
 
-    public static void test1() {
+    public static void test1() throws InterruptedException {
         final Semaphore semaphore = new Semaphore(5);
 
         CustomThreadPoolExecutor customThreadPoolExecutor = new CustomThreadPoolExecutor(
@@ -45,8 +45,9 @@ public class SemaphoreTest {
 
             customThreadPoolExecutor.submit(task);
         }
-
         customThreadPoolExecutor.shutdown();
+        TimeUnit.SECONDS.sleep(5);
+        System.out.println(semaphore.availablePermits());
     }
 
 }

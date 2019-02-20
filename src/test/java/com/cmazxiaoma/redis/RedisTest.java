@@ -52,4 +52,21 @@ public class RedisTest extends InitSpringTest {
             }
         }
     }
+
+    @Test
+    public void testKeys() {
+        Jedis jedis = null;
+
+        try {
+            jedis = jedisPool.getResource();
+
+            for (int i = 0; i < 1000000; i++) {
+                jedis.hset("myhashmap", i + "", i + "");
+            }
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+    }
 }
