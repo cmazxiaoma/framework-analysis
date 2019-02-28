@@ -15,5 +15,6 @@ public class A {
     }
 
     public void sb1() {
+
     }
 }

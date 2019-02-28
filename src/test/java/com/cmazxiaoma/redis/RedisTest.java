@@ -41,7 +41,6 @@ public class RedisTest extends InitSpringTest {
     @Test
     public void testJedisPool() {
         Jedis jedis = null;
-
         try {
             jedis = jedisPool.getResource();
             jedis.del("name");
