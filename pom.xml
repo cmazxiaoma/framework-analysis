@@ -54,6 +54,19 @@
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>com.taobao</groupId>
+			<artifactId>taobao-sdk-java-auto_1491446549028</artifactId>
+			<version>20170828</version>
+		</dependency>
+		<!-- 菜鸟 -->
+		<dependency>
+			<groupId>com.taobao</groupId>
+			<artifactId>pac-sdk-cp</artifactId>
+			<version>4.0.113</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
