@@ -9,6 +9,8 @@ import org.springframework.beans.factory.support.AbstractBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 
+import javax.annotation.Resource;
+
 /**
  * @author cmazxiaoma
  * @version V1.0
@@ -16,9 +18,6 @@ import org.springframework.context.ApplicationContext;
  * @date 2018/9/26 11:55
  */
 public class InjectTest extends InitSpringTest {
-
-//    @Autowired
-//    private MyBaseDao myBaseDao;
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -38,6 +37,8 @@ public class InjectTest extends InitSpringTest {
 
         if (defaultListableBeanFactory.containsSingleton("mySessionFactory")
                 || defaultListableBeanFactory.containsBeanDefinition("mySessionFactory")) {
+
+            // 判断一个bean是否是FactoryBean
             Boolean flag1 = BeanFactoryUtils.isFactoryDereference("mySessionFactory") ;
             Boolean flag2 = defaultListableBeanFactory.isFactoryBean("mySessionFactory");
             Boolean flag3 = (!BeanFactoryUtils.isFactoryDereference("mySessionFactory")
@@ -46,6 +47,47 @@ public class InjectTest extends InitSpringTest {
             System.out.println("=====>flag1=" + flag1);
             System.out.println("=====>flag2=" + flag2);
             System.out.println("=====>flag3=" + flag3);
+
+            // false false true
         }
+    }
+
+    @Test
+    public void test3() {
+        if (defaultListableBeanFactory.containsSingleton("myFactoryBean")
+                || defaultListableBeanFactory.containsBeanDefinition("myFactoryBean")) {
+
+            // 判断一个bean是否是FactoryBean
+            Boolean flag1 = BeanFactoryUtils.isFactoryDereference("&myFactoryBean");
+
+            Boolean flag2 = defaultListableBeanFactory.isFactoryBean("myFactoryBean");
+            Boolean flag3 = (!BeanFactoryUtils.isFactoryDereference("myFactoryBean")
+
+                    || defaultListableBeanFactory.isFactoryBean("myFactoryBean"));
+
+            System.out.println("=====>flag1=" + flag1);
+            System.out.println("=====>flag2=" + flag2);
+            System.out.println("=====>flag3=" + flag3);
+
+            // false true true
+        }
+    }
+
+    @Test
+    public void test4() {
+        MyFactoryBean myFactoryBean = (MyFactoryBean) applicationContext.getBean("&myFactoryBean");
+
+        String myFactoryBeanString = (String) applicationContext.getBean("myFactoryBean");
+
+        System.out.println(myFactoryBean);
+        System.out.println(myFactoryBeanString);
+    }
+
+    @Autowired
+    private MyBaseDao myBaseDao;
+
+    @Test
+    public void test5() {
+        System.out.println("template:" + myBaseDao.getTemplate());
     }
 }

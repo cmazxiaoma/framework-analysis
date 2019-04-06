@@ -1,5 +1,6 @@
 package com.cmazxiaoma.spring.inject;
 
+import com.cmazxiaoma.spring.bean.SpringTest3;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -21,20 +22,11 @@ import static org.springframework.beans.factory.support.AbstractBeanDefinition.A
  * @date 2018/9/27 10:21
  */
 @Component
-public class AutowiredModeBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
+public class AutowiredModeBeanDefinitionRegistryPostProcessor
+        implements BeanDefinitionRegistryPostProcessor {
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-        AbstractBeanDefinition abstractBeanDefinition = (AbstractBeanDefinition)
-                registry.getBeanDefinition("myBaseDao");
-
-        if (abstractBeanDefinition != null) {
-            if (abstractBeanDefinition.getAutowireMode() == AbstractBeanDefinition.AUTOWIRE_NO) {
-                abstractBeanDefinition.setAutowireMode(AUTOWIRE_BY_NAME);
-            }
-        }
-
-
         String[] beanDefinitionNames = registry.getBeanDefinitionNames();
 
         for (String beanDefinitionName : beanDefinitionNames) {
@@ -56,12 +48,12 @@ public class AutowiredModeBeanDefinitionRegistryPostProcessor implements BeanDef
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        RootBeanDefinition bmd = (RootBeanDefinition) beanFactory.getMergedBeanDefinition("myBaseDao");
-
-        if (bmd != null) {
-            if (bmd.getAutowireMode() == AbstractBeanDefinition.AUTOWIRE_NO) {
-                bmd.setAutowireMode(AUTOWIRE_BY_NAME);
-            }
-        }
+//        RootBeanDefinition bmd = (RootBeanDefinition) beanFactory.getMergedBeanDefinition("myBaseDao");
+//
+//        if (bmd != null) {
+//            if (bmd.getAutowireMode() == AbstractBeanDefinition.AUTOWIRE_NO) {
+//                bmd.setAutowireMode(AUTOWIRE_BY_NAME);
+//            }
+//        }
     }
 }

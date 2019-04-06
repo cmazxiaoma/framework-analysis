@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
  * 创建时间： 2018-9-26
  */
 @Component
-@Lazy
 public class MyBaseDao extends MyHibernateDaoSupport {
 
 }

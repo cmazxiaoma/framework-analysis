@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 @Component
 public class LoopReferenceA {
 
-    @Resource
+    @Autowired
     private LoopReferenceB loopReferenceB;
 
 //    public LoopReferenceA(@Autowired LoopReferenceB loopReferenceB) {

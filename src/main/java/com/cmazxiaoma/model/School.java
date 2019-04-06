@@ -21,6 +21,7 @@ import java.util.Set;
 @Table(name = "tbl_school")
 @Setter
 @Getter
+// 只更新变化的字段
 @DynamicUpdate(value = true)
 @DynamicInsert(value = true)
 public class School implements Serializable {

@@ -150,6 +150,7 @@ public class ISchoolDaoTest extends InitSpringTest {
         for (int i = 0; i < 3; i++) {
             Date date = new Date();
             System.out.println("第" + (i + 1) + "次, "+ DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+
             Student student = new Student();
             student.setId("1");
             student.setStudentName("彭赛是傻逼123");

@@ -7,6 +7,7 @@ import com.cmazxiaoma.spring.compoent.SpringTest4;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
@@ -27,7 +28,8 @@ import java.util.Set;
  * @Description: TODO
  * @date 2018/8/8 15:10
  */
-public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
+public class MyBeanDefinitionRegistryPostProcessor
+        implements BeanDefinitionRegistryPostProcessor, BeanPostProcessor {
 
     private ConfigurableListableBeanFactory configurableListableBeanFactory;
 
@@ -77,9 +79,21 @@ public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegi
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         this.configurableListableBeanFactory = beanFactory;
-
-//        BeanDefinition springTest3BeanDefinition = beanFactory.getBeanDefinition(SpringTest3.class.getCanonicalName());
+        BeanDefinition springTest3BeanDefinition = beanFactory.getBeanDefinition(SpringTest3.class.getCanonicalName());
         //SpringTest3 springTest3 = (SpringTest3) beanFactory.getBean(SpringTest3.class.getCanonicalName());
         //SpringTest4 springTest4 = (SpringTest4) beanFactory.getBean(SpringTest4.class);
+    }
+
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        return bean;
+    }
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        if (SpringTest3.class.getCanonicalName().equals(beanName)) {
+            System.out.println("springTest3 Initialization");
+        }
+        return bean;
     }
 }

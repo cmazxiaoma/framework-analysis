@@ -1,7 +1,6 @@
 package com.cmazxiaoma.hibernate;
 
 import com.cmazxiaoma.InitSpringTest;
-//import com.cmazxiaoma.MyHibernateSupport;
 import com.cmazxiaoma.MyCommonDao;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
