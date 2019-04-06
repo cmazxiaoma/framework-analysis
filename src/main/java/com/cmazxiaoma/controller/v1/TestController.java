@@ -57,4 +57,15 @@ public class TestController extends BaseController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
+
+//    @InitBinder("user")
+//    public void initUser(WebDataBinder binder) {
+//        binder.setFieldDefaultPrefix("user.");
+//
+//    }
+//
+//    @InitBinder("admin")
+//    public void initAdmin(WebDataBinder binder) {
+//        binder.setFieldDefaultPrefix("admin.");
+//    }
 }
