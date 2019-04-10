@@ -78,16 +78,16 @@ public class InjectTest extends InitSpringTest {
     private MyFactoryBean autowiredMyFactoryBean;
 
     @Resource(name = "myFactoryBean")
-    private String resourceMyFactoryBean;
+    private User resourceMyFactoryBean;
 
     @Test
     public void test4() throws Exception {
         MyFactoryBean myFactoryBean = (MyFactoryBean) applicationContext.getBean("&myFactoryBean");
 
-        String myFactoryBeanString = (String) applicationContext.getBean("myFactoryBean");
+        User user = (User) applicationContext.getBean("myFactoryBean");
 
         System.out.println(myFactoryBean);
-        System.out.println(myFactoryBeanString);
+        System.out.println(user);
 
         System.out.println(autowiredMyFactoryBean);
         System.out.println(resourceMyFactoryBean);
