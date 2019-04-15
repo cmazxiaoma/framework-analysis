@@ -27,7 +27,6 @@ public class SimpleMergeSort {
             }
         }
 
-
         while (aIndex < sizeA) {
             c[cIndex++] = a[aIndex++];
         }
