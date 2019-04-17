@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -99,5 +101,17 @@ public class InjectTest extends InitSpringTest {
     @Test
     public void test5() {
         System.out.println("template:" + myBaseDao.getTemplate());
+    }
+
+
+    @Autowired
+    private AutowireCapableBeanFactory autowireCapableBeanFactory;
+
+    @Test
+    public void test6() {
+        MyBaseDao myBaseDao = (MyBaseDao) autowireCapableBeanFactory
+                .autowire(MyBaseDao.class, AbstractBeanDefinition.AUTOWIRE_BY_NAME,
+                        true);
+        System.out.println(myBaseDao.getTemplate());
     }
 }

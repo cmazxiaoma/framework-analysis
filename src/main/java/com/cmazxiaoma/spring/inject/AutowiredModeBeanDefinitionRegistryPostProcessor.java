@@ -27,23 +27,23 @@ public class AutowiredModeBeanDefinitionRegistryPostProcessor
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-        String[] beanDefinitionNames = registry.getBeanDefinitionNames();
-
-        for (String beanDefinitionName : beanDefinitionNames) {
-            BeanDefinition beanDefinition = registry.getBeanDefinition(beanDefinitionName);
-
-            if (beanDefinition instanceof AbstractBeanDefinition) {
-                AbstractBeanDefinition hibernateDaoSupportBeanDefinition = (AbstractBeanDefinition)
-                        beanDefinition;
-
-                if (beanDefinitionName.contains("Dao")) {
-                    if (hibernateDaoSupportBeanDefinition.getAutowireMode()
-                            == AbstractBeanDefinition.AUTOWIRE_NO) {
-                        hibernateDaoSupportBeanDefinition.setAutowireMode(AUTOWIRE_BY_NAME);
-                    }
-                }
-            }
-        }
+//        String[] beanDefinitionNames = registry.getBeanDefinitionNames();
+//
+//        for (String beanDefinitionName : beanDefinitionNames) {
+//            BeanDefinition beanDefinition = registry.getBeanDefinition(beanDefinitionName);
+//
+//            if (beanDefinition instanceof AbstractBeanDefinition) {
+//                AbstractBeanDefinition hibernateDaoSupportBeanDefinition = (AbstractBeanDefinition)
+//                        beanDefinition;
+//
+//                if (beanDefinitionName.contains("Dao")) {
+//                    if (hibernateDaoSupportBeanDefinition.getAutowireMode()
+//                            == AbstractBeanDefinition.AUTOWIRE_NO) {
+//                        hibernateDaoSupportBeanDefinition.setAutowireMode(AUTOWIRE_BY_NAME);
+//                    }
+//                }
+//            }
+//        }
     }
 
     @Override
