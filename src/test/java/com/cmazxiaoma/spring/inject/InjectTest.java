@@ -103,7 +103,6 @@ public class InjectTest extends InitSpringTest {
         System.out.println("template:" + myBaseDao.getTemplate());
     }
 
-
     @Autowired
     private AutowireCapableBeanFactory autowireCapableBeanFactory;
 

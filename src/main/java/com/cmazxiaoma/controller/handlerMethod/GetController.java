@@ -1,4 +1,4 @@
-package com.cmazxiaoma.controller;
+package com.cmazxiaoma.controller.handlerMethod;
 
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -28,4 +28,5 @@ public class GetController {
     public void initAdmin(WebDataBinder binder) {
         binder.setFieldDefaultPrefix("admin.");
     }
+
 }

@@ -27,23 +27,26 @@ public class AutowiredModeBeanDefinitionRegistryPostProcessor
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-//        String[] beanDefinitionNames = registry.getBeanDefinitionNames();
-//
-//        for (String beanDefinitionName : beanDefinitionNames) {
-//            BeanDefinition beanDefinition = registry.getBeanDefinition(beanDefinitionName);
-//
-//            if (beanDefinition instanceof AbstractBeanDefinition) {
-//                AbstractBeanDefinition hibernateDaoSupportBeanDefinition = (AbstractBeanDefinition)
-//                        beanDefinition;
-//
-//                if (beanDefinitionName.contains("Dao")) {
-//                    if (hibernateDaoSupportBeanDefinition.getAutowireMode()
-//                            == AbstractBeanDefinition.AUTOWIRE_NO) {
-//                        hibernateDaoSupportBeanDefinition.setAutowireMode(AUTOWIRE_BY_NAME);
-//                    }
-//                }
-//            }
-//        }
+        //添加这一句是生成代理类的class文件，前提是你需要在工程根目录下创建com/sun/proxy目录
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
+
+        String[] beanDefinitionNames = registry.getBeanDefinitionNames();
+
+        for (String beanDefinitionName : beanDefinitionNames) {
+            BeanDefinition beanDefinition = registry.getBeanDefinition(beanDefinitionName);
+
+            if (beanDefinition instanceof AbstractBeanDefinition) {
+                AbstractBeanDefinition hibernateDaoSupportBeanDefinition = (AbstractBeanDefinition)
+                        beanDefinition;
+
+                if (beanDefinitionName.contains("Dao")) {
+                    if (hibernateDaoSupportBeanDefinition.getAutowireMode()
+                            == AbstractBeanDefinition.AUTOWIRE_NO) {
+                        hibernateDaoSupportBeanDefinition.setAutowireMode(AUTOWIRE_BY_NAME);
+                    }
+                }
+            }
+        }
     }
 
     @Override

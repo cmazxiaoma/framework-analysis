@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class MyThreadLocal {
 
-    public static final ThreadLocal<DateFormat> dateFormatThreadLocal = new ThreadLocal<DateFormat>(){
+    public static final ThreadLocal<DateFormat> DATE_FORMAT_THREAD_LOCAL = new ThreadLocal<DateFormat>(){
         @Override
         protected DateFormat initialValue() {
             return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -21,11 +21,12 @@ public class MyThreadLocal {
     };
 
     public static String format(Date date) {
-        return dateFormatThreadLocal.get().format(date);
+        return DATE_FORMAT_THREAD_LOCAL.get().format(date);
     }
 
     public static Date parse(String date) throws ParseException {
-        return dateFormatThreadLocal.get().parse(date);
+        return DATE_FORMAT_THREAD_LOCAL.get().parse(date);
+
     }
 
     public static void main(String[] args) {

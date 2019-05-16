@@ -33,4 +33,8 @@ public class SpringTest4 {
                 ", springTest2=" + springTest2 +
                 '}';
     }
+
+    public static void main(String[] args) {
+        System.out.println();
+    }
 }
