@@ -167,7 +167,7 @@ public class IStudentMapperTest extends InitSpringTest {
         try {
             studentSqlSession.select(
                     STUDENTMAPPER + "findOneByV2",
-                    "1",
+                    "2",
                     new ResultHandler() {
                         @Override
                         public void handleResult(ResultContext resultContext) {

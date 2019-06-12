@@ -78,7 +78,10 @@ public class UserService {
     @HystrixCollapser(batchMethod = "findAll",
             scope = com.netflix.hystrix.HystrixCollapser.Scope.GLOBAL,
             collapserProperties = {
-            @HystrixProperty(name = "timerDelayInMilliseconds", value = "3000")
+                    @HystrixProperty(name = "timerDelayInMilliseconds", value = "3000"),
+
+                    // 该参数用来设置一次请求合并批处理中允许的最大请求数
+                    @HystrixProperty(name = "maxRequestsInBatch", value = "100")
     })
     public Future<HystrixTest.User> getUserByIdV3(Long id) {
         return new AsyncResult<HystrixTest.User>() {

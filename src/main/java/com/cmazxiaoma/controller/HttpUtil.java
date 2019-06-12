@@ -38,9 +38,9 @@ public class HttpUtil {
                 srtResult = EntityUtils.toString(httpResponse.getEntity());//获得返回的结果
                 System.out.println(srtResult);
             }else if(httpResponse.getStatusLine().getStatusCode() == 400){
-                // to do
+                throw new RuntimeException();
             }else if(httpResponse.getStatusLine().getStatusCode() == 500){
-                // to do
+                throw new RuntimeException();
             }
         } catch (IOException e) {
             e.printStackTrace();

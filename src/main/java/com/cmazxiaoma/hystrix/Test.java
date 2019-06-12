@@ -59,10 +59,11 @@ public class Test {
             public void run() {
                 try {
                     TimeUnit.SECONDS.sleep(5);
-                    System.out.println("=======等待5s=====");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+                System.out.println("=================等待5s===========");
             }
         }).start();
 

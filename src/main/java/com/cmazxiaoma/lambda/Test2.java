@@ -1,9 +1,12 @@
 package com.cmazxiaoma.lambda;
 
+import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Lists;
+import com.google.gson.JsonArray;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -53,6 +56,31 @@ public class Test2 {
                     Integer integer = list.get(i);
                     System.out.println(integer);
                 });
+
+        System.out.println("=================================");
+
+
+        String str = productList.stream().map(product -> {
+            return String.valueOf(product.getId());
+        }).collect(Collectors.joining(",", "{", "}"));
+
+        System.out.println("str=" + str);
+
+        List<Employee> employeeList = Lists.newArrayList();
+        employeeList.add(new Employee("name1", "后端1组"));
+        employeeList.add(new Employee("name2", "后端1组"));
+
+        employeeList.add(new Employee("name3", "后端2组"));
+        employeeList.add(new Employee("name4", "后端2组"));
+
+
+        Map<String, List<String>> resultMap = employeeList.stream().collect(
+                Collectors.groupingBy(Employee::getDepartmentName,
+                        Collectors.mapping(Employee::getUsername,
+                                Collectors.toList()))
+        );
+
+        System.out.println(resultMap);
     }
 
     @Data
@@ -60,5 +88,12 @@ public class Test2 {
     public static class Product {
         private Integer id;
         private Integer count;
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static class Employee {
+        private String username;
+        private String departmentName;
     }
 }
