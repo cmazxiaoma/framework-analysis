@@ -67,11 +67,11 @@ public class Test2 {
         System.out.println("str=" + str);
 
         List<Employee> employeeList = Lists.newArrayList();
-        employeeList.add(new Employee("name1", "后端1组"));
-        employeeList.add(new Employee("name2", "后端1组"));
-
-        employeeList.add(new Employee("name3", "后端2组"));
-        employeeList.add(new Employee("name4", "后端2组"));
+//        employeeList.add(new Employee("name1", "后端1组"));
+//        employeeList.add(new Employee("name2", "后端1组"));
+//
+//        employeeList.add(new Employee("name1", "后端2组"));
+//        employeeList.add(new Employee("name2", "后端2组"));
 
 
         Map<String, List<String>> resultMap = employeeList.stream().collect(

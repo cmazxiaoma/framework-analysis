@@ -11,11 +11,12 @@ public class QuickSortTest {
     public static int[] array = {3123, 43, 4234, 123, 13, 5434, 13, 124, 2112, 10, 5, 1, 0, 424234};
 
     public static void main(String[] args) {
-//        sortByRecursion(0, array.length - 1);
+        bubbleSort2();
+        //sortByRecursion(0, array.length - 1);
 
 //        sortByRecursion2(0, array.length - 1);
 
-          insertSort();
+//          insertSort();
 
 //        bubbleSort();
 
@@ -28,6 +29,7 @@ public class QuickSortTest {
 
     /**
      * 优化版快速排序
+     *
      * @param start
      * @param end
      */
@@ -61,6 +63,7 @@ public class QuickSortTest {
 
     /**
      * 复杂版快速排序
+     *
      * @param start
      * @param end
      */
@@ -109,7 +112,7 @@ public class QuickSortTest {
 
             while (j >= 0 && value <= array[j]) {
                 array[j + 1] = array[j];
-                j --;
+                j--;
             }
 
             array[j + 1] = value;
@@ -120,7 +123,7 @@ public class QuickSortTest {
      * 冒泡排序
      */
     public static void bubbleSort() {
-        for (int i = 0; i < array.length - 1;i++) {
+        for (int i = 0; i < array.length - 1; i++) {
             for (int j = 0; j < array.length - 1 - i; j++) {
                 if (array[j] > array[j + 1]) {
                     swap(j, j + 1);
@@ -128,6 +131,18 @@ public class QuickSortTest {
             }
         }
     }
+
+    /**
+     * 从后往前遍历
+     */
+    public static void bubbleSort2() {
+        for (int i = 0; i < array.length - 1; i++)
+            for (int j = array.length - 2; j >= i; j--)//从后向前比较，将最小的移动到最前面，前面逐渐有序
+                if (array[j] > array[j + 1]) {
+                    swap(j, j + 1);
+                }
+    }
+
 
     /**
      * 选择排序

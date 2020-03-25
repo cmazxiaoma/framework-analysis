@@ -37,11 +37,16 @@ public class MyLockTest {
 
                                 System.out.println("thread:" + Thread.currentThread().getName() + "execute...");
 
-                                TimeUnit.SECONDS.sleep(1);
                                 System.out.println("thread:" + Thread.currentThread().getName() + "unLock...");
-                                lock.unLook();
                             } catch (Exception ex) {
                                 ex.printStackTrace();
+                            } finally {
+                                try {
+                                    TimeUnit.SECONDS.sleep(10);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                lock.unLook();
                             }
                         }
                     }

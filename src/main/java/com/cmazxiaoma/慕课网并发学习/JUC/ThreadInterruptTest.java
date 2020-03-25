@@ -1,5 +1,9 @@
 package com.cmazxiaoma.慕课网并发学习.JUC;
 
+import com.cmazxiaoma.quzhuanxiang.DateUtils;
+
+import java.util.Date;
+
 /**
  * @author cmazxiaoma
  * @version V1.0
@@ -26,5 +30,10 @@ public class ThreadInterruptTest {
         thread.start();
 
         thread.interrupt();
+
+        Date startDate = DateUtils.getDayBefore(new Date(), 7);
+        Date endDate = DateUtils.getDayBefore(new Date(), 1);
+
+        System.out.println(startDate + "," + endDate);
     }
 }

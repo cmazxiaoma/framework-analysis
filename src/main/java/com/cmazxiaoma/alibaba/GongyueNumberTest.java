@@ -28,11 +28,15 @@ public class GongyueNumberTest {
         long start4 = System.currentTimeMillis();
         int result4 = gcd4(number1, number2);
         System.out.println("result4=" + result4 + ",耗时=" + (System.currentTimeMillis() - start4) + "ms");
+
+
+        System.out.println(gcd1(24, 22));
     }
 
     /**
      * 暴力破解法
      */
+
     public static int gcd1(int number1, int number2) {
         int small = number1 >= number2 ? number2 : number1;
         int big = number1 >= number2 ? number1 : number2;

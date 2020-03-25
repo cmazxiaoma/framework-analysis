@@ -27,7 +27,12 @@ public class RetryController {
 
     @GetMapping("/demo")
     public String demo() {
-
+        /**
+         * spring-retry工具虽能优雅实现重试，但是存在两个不友好设计：
+         * 一个是 重试实体限定为Throwable子类，说明重试针对的是可捕捉的功能异常为设计前提的，
+         * 但是我们希望依赖某个数据对象实体作为重试实体，但Spring-retry框架必须强制转换为Throwable子类。
+         * 另一个就是重试根源的断言对象使用的是doWithRetry的Exception 异常实例，不符合正常内部断言的返回设计。
+         */
         Retryer<String> retryer = RetryerBuilder.<String>newBuilder()
                 .retryIfResult(
                         Predicates.or(

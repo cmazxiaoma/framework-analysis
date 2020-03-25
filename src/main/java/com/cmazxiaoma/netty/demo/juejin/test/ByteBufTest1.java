@@ -12,6 +12,7 @@ import io.netty.buffer.ByteBufAllocator;
 public class ByteBufTest1 {
 
     public static void main(String[] args) {
+
         ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer(9, 100);
         print("allocate ByteBuf(9,100)", buffer);
 
@@ -28,6 +29,7 @@ public class ByteBufTest1 {
          */
         buffer.writeInt(12);
         print("writeInt(12)", buffer);
+        System.out.println("index:4 int:" + buffer.getInt(4));
 
         // write 方法改变写指针, 写完之后写指针等于 capacity 的时候，buffer 不可写
 
@@ -59,8 +61,7 @@ public class ByteBufTest1 {
         buffer.readBytes(dst);
         print("readBytes(" + dst.length + ")", buffer);
 
-
-        System.out.println(buffer.isDirect());
+        System.out.println("direct:" + buffer.isDirect());
 
     }
 

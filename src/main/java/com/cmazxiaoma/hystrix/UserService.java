@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 /**
  * 默认情况下，Hystrix会让相同组名的命令使用同一个线程池，
  * 所以我们需要在创建Hystrix命令时为其指定命令组名来实现默认的线程池划分。
+ * @HystrixProperty(name = "fallback.isolation.semaphore.maxConcurrentRequests", value = "1000")
  */
 @Service
 public class UserService {

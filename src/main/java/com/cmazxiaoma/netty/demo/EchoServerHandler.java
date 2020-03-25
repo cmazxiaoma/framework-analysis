@@ -35,8 +35,8 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
          *
          * 将未决消息冲刷到远程节点，并且关闭该Channel
          */
-        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)
-                .addListener(ChannelFutureListener.CLOSE);
+        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER);
+                //.addListener(ChannelFutureListener.CLOSE);
     }
 
     @Override

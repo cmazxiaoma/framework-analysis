@@ -46,10 +46,14 @@ public class  MyLock {
             if (isOnlyOne && compareAndSetState(0, 1)) {
                 return;
             }
+
             //
             LockSupport.park(this);
+            System.out.println("LockSupport.park(this);");
+
 
             if (compareAndSetState(0, 1)) {
+                System.out.println("compareAndSetState(0, 1)");
                 return;
             }
         }
@@ -70,3 +74,4 @@ public class  MyLock {
         return unsafe.compareAndSwapInt(this, stateOffSet, expect, update);
     }
 }
+

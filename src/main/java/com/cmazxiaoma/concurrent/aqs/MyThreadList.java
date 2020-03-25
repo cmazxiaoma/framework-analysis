@@ -24,16 +24,43 @@ public class MyThreadList {
             ReflectionUtils.makeAccessible(constructor);
             unsafe = constructor.newInstance();
             headOffset = unsafe.objectFieldOffset
-                    (AbstractQueuedSynchronizer.class.getDeclaredField("head"));
+                    (MyThreadList.class.getDeclaredField("head"));
 
         } catch (Exception ex) { throw new Error(ex); }
     }
 
+    /**
+     * Node pred = tail;
+     if (pred != null) {
+     node.prev = pred;
+     if (compareAndSetTail(pred, node)) {
+     pred.next = node;
+     return node;
+     }
+     }
+     * for (;;) {
+     Node t = tail;
+     if (t == null) { // Must initialize
+     if (compareAndSetHead(new Node()))
+     tail = head;
+     } else {
+     node.prev = t;
+     if (compareAndSetTail(t, node)) {
+     t.next = node;
+     return t;
+     }
+     }
+     }
+     * @param thread
+     * @return
+     */
     public boolean insert(Thread thread) {
         Node node = new Node(thread);
 
         for (;;) {
+
             Node first = getHead();
+
             node.setNext(first);
 
             if (unsafe.compareAndSwapObject(this, headOffset, first, node)) {

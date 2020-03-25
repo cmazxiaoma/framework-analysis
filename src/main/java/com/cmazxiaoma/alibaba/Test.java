@@ -26,15 +26,18 @@ public class Test {
             myServerChannel.accept(null, this);
 
             myClientChannel.read(null, null, new Handler<Integer, Object>() {
+
                 @Override
                 public void completed(Integer result, Object attachment) {
                     System.out.println("客户端读完成");
                     myClientChannel.read(null, null, this);
                 }
+
                 @Override
                 public void failed(Throwable ex, Object attachment) {
 
                 }
+
             });
 
         }

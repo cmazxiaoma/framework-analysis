@@ -18,6 +18,7 @@ public class ClassLoaderChecker {
         System.out.println(myClassLoader.getParent());
         System.out.println(myClassLoader.getParent().getParent());
         System.out.println(myClassLoader.getParent().getParent().getParent());
+
         Object object = myClass.newInstance();
 
     }

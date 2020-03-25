@@ -33,7 +33,7 @@ public class PlainNioClient {
         socketChannel.register(selector, SelectionKey.OP_READ);
         new ClientThread().start();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             socketChannel.write(charset.encode(i + ""));
         }
     }

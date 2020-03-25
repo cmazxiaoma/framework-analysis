@@ -32,7 +32,7 @@ public class HystrixController2 {
                     //当出错率超过50%后熔断器启动
                     @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
                     // 熔断器工作时间，超过这个时间，先放一个请求进去，成功的话就关闭熔断，失败就再等一段时间
-                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000"),
+                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "50000"),
                     // 统计滚动的时间窗口
                     @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "10000")
             })

@@ -16,6 +16,9 @@ public class extendSuper {
 //        fruitList.add(new Apple());
 //        fruitList.add(new Orange());
 
+//        fruitList.add(new Fruit());
+//        fruitList.add(new Thing());
+
         fruitList.add(null);
         fruitList.contains(new Apple());
         fruitList.indexOf(new Apple());
@@ -37,8 +40,8 @@ public class extendSuper {
         System.out.println("apple2=" + apple2);
     }
 }
-
-class Fruit {}
+class Thing {}
+class Fruit extends Thing {}
 class Apple extends Fruit {}
 class Orange extends Fruit {}
 class Apple1 extends Apple {}

@@ -104,6 +104,7 @@ public class EventBusTest {
 
         // 订阅事件
         eventBus.register(new MsgEventListener());
+        eventBus.register(new MsgEventListener());
 
         // 发布事件
         Publisher myPublisher = new MyPublisher(eventBus);

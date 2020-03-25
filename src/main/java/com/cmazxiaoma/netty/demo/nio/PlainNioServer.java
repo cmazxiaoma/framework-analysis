@@ -64,9 +64,7 @@ public class PlainNioServer {
                             client.configureBlocking(false);
 
                             // 接受客户端，并将它注册到选择器
-                            client.register(selector,
-                                    SelectionKey.OP_WRITE | SelectionKey.OP_READ,
-                                    msg.duplicate());
+                            client.register(selector, SelectionKey.OP_WRITE | SelectionKey.OP_READ, msg.duplicate());
 
                             System.out.println("accepted connection from " + client);
 
