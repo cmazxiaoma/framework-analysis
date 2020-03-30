@@ -1,6 +1,5 @@
 package com.cmazxiaoma.alibaba.skip;
 
-import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -50,6 +49,8 @@ public class SkipListTest {
         public Node find(int value) {
             Node p = head;
             for (int i = levelCount -1; i >= 0; i--) {
+                // 首先在最高层检索，寻找比当前值小的。
+                // 没有找到，继续往下层找
                 while (p.forwards[i] != null && p.forwards[i].data < value) {
                     p = p.forwards[i];
                 }
@@ -130,6 +131,7 @@ public class SkipListTest {
 
         class Node {
             private int data;
+            // Node节点中forwards存储的是该节点在各个level索引的下一个数据节点
             private Node[] forwards = new Node[MAX_LEVEL];
             private int maxLevel;
 
